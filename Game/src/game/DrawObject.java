@@ -64,9 +64,9 @@ public class DrawObject extends JFrame {
 	
 	public void paint(Graphics g){
 		imageBuff=createImage(getWidth(),getHeight());
-		 graphicBuff=imageBuff.getGraphics();
-		 paintComponent(graphicBuff);
-		 g.drawImage(imageBuff,0,0,this);
+		graphicBuff=imageBuff.getGraphics();
+		paintComponent(graphicBuff);
+		g.drawImage(imageBuff,0,0,this);
 	}
 	
 	public void paintComponent(Graphics g){
