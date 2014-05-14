@@ -16,7 +16,7 @@ public class DrawObject extends JFrame {
 	private Image imageBuff;
 	private Graphics graphicBuff;
 	//GamePanel gPanel;
-	
+
 	public DrawObject() {
 		addKeyListener(new keyValue());
 		//gPanel=new GamePanel();
@@ -27,56 +27,56 @@ public class DrawObject extends JFrame {
 		//add(gPanel);
 		x=10;
 		y=10;
-		
+
 	}
-	
+
 	public class keyValue extends KeyAdapter{
-	
+
 		public void keyPressed(KeyEvent e){
 			int key=e.getKeyCode();
-			
+
 			if (key==e.VK_LEFT){
-				
+
 				x--;
 			}
 			if (key==e.VK_RIGHT){
-					
+
 				x++;
-				
+
 			}
 			if (key==e.VK_UP){
-				
+
 				y--;
 			}
 			if (key==e.VK_DOWN){
 				y++;
 			}
 		}
-		
+
 		public void keyReleased(KeyEvent e){
-			
+
 		}
-		
+
 		public void keyTyped(KeyEvent e){
-			
+
 		}
 	};
-	
+
 	public void paint(Graphics g){
 		imageBuff=createImage(getWidth(),getHeight());
 		graphicBuff=imageBuff.getGraphics();
 		paintComponent(graphicBuff);
 		g.drawImage(imageBuff,0,0,this);
 	}
-	
+
 	public void paintComponent(Graphics g){
 		g.setColor(Color.green);
 		g.fillRect(x, y, 10, 10);
 		repaint();
 	}
-	
+
 	public static void main(String[] args) {
-		
+
 		new DrawObject();
 
 	}
