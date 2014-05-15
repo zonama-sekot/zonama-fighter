@@ -1,5 +1,7 @@
 package game.invader;
 
+import game.space.Space;
+
 import java.awt.*;
 import javax.swing.*;
 
@@ -49,5 +51,11 @@ public class Invader extends JPanel {
         super.paintComponent(graphics);
         graphics.setColor(Color.MAGENTA);
         graphics.fillRect(x, y, WIDTH, HEIGHT);
+    }
+
+    public static Invader createInvader() {
+        Invader invader = new Invader();
+        invader.setX(Space.getRandomColumn());
+        return invader;
     }
 }

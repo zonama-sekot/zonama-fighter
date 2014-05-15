@@ -1,3 +1,5 @@
+package game;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
@@ -10,15 +12,15 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 
-public class Movement extends JPanel implements ActionListener, KeyListener{ // Implement two interfaces ActionListener and KeyListener.
+public class InputBehavior extends JPanel implements ActionListener, KeyListener{ // Implement two interfaces ActionListener and KeyListener.
 
    Timer tm = new Timer(5, this); //Timer object is used for animation. This is refer to ActionListener
     int x = 0, y = 0, velX = 0, velY = 0; // Position of the rectangle by default.
                                          // The rectangle will be into the top left corner from the window.
                                           // velX is the speed of rectangle horizontaly.
                                           // velY is the speed of rectangle by Y.
-    public Movement() {
-       tm.start();    // start the timer. Here we began the animation process.
+    public InputBehavior() {
+        tm.start();    // start the timer. Here we began the animation process.
         addKeyListener(this); // This refer to KeyListener interface.
         setFocusable(true); // Enable the KeyListener.
         setFocusTraversalKeysEnabled(false); // Used shift key.
@@ -94,10 +96,10 @@ public class Movement extends JPanel implements ActionListener, KeyListener{ // 
     
     
     public static void main (String[] args) {
-        Movement t = new Movement(); // Movement class is extended to the JPanel.
+        InputBehavior t = new InputBehavior(); // InputBehavior class is extended to the JPanel.
         //Created JFrame to the program.
         JFrame jf = new JFrame();
-        jf.setTitle("Movement");
+        jf.setTitle("InputBehavior");
         jf.setSize(600, 400);
         jf.setVisible(true);
         jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

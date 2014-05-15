@@ -7,7 +7,7 @@ import java.util.Random;
 
 import game.invader.Invader;
 
-public class Space extends JFrame {
+public class Space extends JFrame implements KeyListener{
 
     public static final String TITLE = "Zonama Fighter";
 
@@ -17,19 +17,13 @@ public class Space extends JFrame {
 
     protected SpacePanel panel;
 
-    public static void main(String[] args) {
-        new Space();
+    public SpacePanel getPanel(){
+        return this.panel;
     }
 
     public static int getRandomColumn() {
         Random rand = new Random();
         return rand.nextInt(WIDTH - Invader.WIDTH);
-    }
-
-    public static Invader createInvader() {
-        Invader invader = new Invader();
-        invader.setX(Space.getRandomColumn());
-        return invader;
     }
 
     public Space() {
@@ -40,10 +34,44 @@ public class Space extends JFrame {
         setContentPane(panel);
         panel.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         panel.setLayout(null);
-        panel.addInvader(Space.createInvader());
         pack();
         setResizable(false);
         setVisible(true);
         panel.startTimer();
+
+        addKeyListener(this); // This refer to KeyListener interface.
+    }
+
+    public void addInvaders(int invadersCount){
+        for (int i = 0; i < invadersCount; i++) {
+            this.getPanel().addInvader(Invader.createInvader());
+        }
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        int c = e.getKeyCode(); // Get the button from the keyboard.
+
+        if (c == KeyEvent.VK_LEFT) { // for left key
+        }
+
+        if (c == KeyEvent.VK_UP) { // for up key
+        }
+
+        if (c == KeyEvent.VK_RIGHT) { // for right key
+        }
+
+        if (c == KeyEvent.VK_DOWN) { // for down key
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
     }
 }
