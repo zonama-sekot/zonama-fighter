@@ -99,8 +99,8 @@ public class Movement extends JPanel implements ActionListener, KeyListener{ // 
         JFrame jf = new JFrame();
         jf.setTitle("Movement");
         jf.setSize(600, 400);
-        jf.setVisible(true);
         jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jf.add(t);
+        jf.setVisible(true);
     }
 }
