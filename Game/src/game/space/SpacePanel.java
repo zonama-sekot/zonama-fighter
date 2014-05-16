@@ -44,6 +44,6 @@ public class SpacePanel extends JPanel implements ActionListener {
 
     public void actionPerformed(ActionEvent event) {
         moveInvaders();
-        addInvader(Space.createInvader());
+        addInvader(Invader.createInvader());
     }
 }
