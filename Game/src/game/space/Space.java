@@ -30,6 +30,7 @@ public class Space extends JFrame implements KeyListener{
 
         // This refer to KeyListener interface.
         addKeyListener(this);
+        this.setFocusable(true);
     }
 
     @Override
@@ -39,19 +40,7 @@ public class Space extends JFrame implements KeyListener{
 
     @Override
     public void keyPressed(KeyEvent e) {
-        int c = e.getKeyCode(); // Get the button from the keyboard.
-
-        if (c == KeyEvent.VK_LEFT) { // for left key
-        }
-
-        if (c == KeyEvent.VK_UP) { // for up key
-        }
-
-        if (c == KeyEvent.VK_RIGHT) { // for right key
-        }
-
-        if (c == KeyEvent.VK_DOWN) { // for down key
-        }
+        this.panel.notifyForKeyPressed(e);
     }
 
     @Override

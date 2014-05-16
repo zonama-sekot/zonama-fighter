@@ -31,7 +31,7 @@ public class Invader extends JPanel {
         y = 0;
         visible = true;
 
-        System.out.printf("New column: %s\n", x);
+        //System.out.printf("New column: %s\n", x);
     }
 
     public int getStep() {
@@ -68,11 +68,11 @@ public class Invader extends JPanel {
 
         if (y > Shared.SPACE_HEIGHT || (x > Shared.SPACE_WIDTH || (x - dim.getWidth()) < 0)) {
             visible = false;
-            System.out.printf("Hide invader at: %d, %d\n", x, y);
+            //System.out.printf("Hide invader at: %d, %d\n", x, y);
         }
 
         if (visible) {
-            System.out.printf("Position  : %d, %d\n", x, y);
+            //System.out.printf("Position  : %d, %d\n", x, y);
         }
     }
 
