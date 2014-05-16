@@ -1,61 +1,90 @@
 package game.invader;
 
-import game.space.Space;
-
 import java.awt.*;
 import javax.swing.*;
+import java.util.Random;
+
+import game.space.Space;
+import game.Shared;
 
 public class Invader extends JPanel {
 
-    public static final Color DEFAULT_BACKGROUND = Color.MAGENTA;
+    private static final String ICON = "invader.jpg";
 
-    public static final int WIDTH = 10;
-
-    public static final int HEIGHT = 10;
-
-    public static final int DEFAULT_STEP = HEIGHT;
-
-    int step = DEFAULT_STEP;
-
-    int x = 0;
-
-    int y = 0;
+    private int dx = 0;
+    private int dy = 1;
+    private int x;
+    private int y;
+    private int step = Shared.INVADER_STEP;
+    private Image image;
+    private boolean visible;
+    private Dimension dim;
 
     public Invader() {
-        setLayout(null);
-        setPreferredSize(new Dimension(WIDTH, HEIGHT));
+        ImageIcon icon = new ImageIcon(this.getClass().getResource(ICON));
+        image = icon.getImage();
+
+        dim = new Dimension(Shared.INVADER_WIDTH, Shared.INVADER_HEIGHT);
+        setPreferredSize(dim);
+
+        x = getRandomColumn();
+        y = 0;
+        visible = true;
+
+        System.out.printf("New column: %s\n", x);
     }
-	
+
     public int getStep() {
         return step;
     }
 
-    public Invader setStep(int step) {
+    public void setStep(int step) {
         this.step = step;
-        return this;
     }
 
-    public void setX(int x) {
-        System.out.printf("New column: %s\n", x);
-        this.x = x;
+    public int getX() {
+        return x;
     }
 
-    public Invader moveDown() {
-        y += step;
-        repaint();
-        System.out.printf("Position  : %d, %d\n", x, y);
-        return this;
+    public int getY() {
+        return y;
     }
 
-    public void paintComponent(Graphics graphics) {
-        super.paintComponent(graphics);
-        graphics.setColor(Color.MAGENTA);
-        graphics.fillRect(x, y, WIDTH, HEIGHT);
+    public Image getImage() {
+        return image;
     }
 
-    public static Invader createInvader() {
-        Invader invader = new Invader();
-        invader.setX(Space.getRandomColumn());
-        return invader;
+    public boolean isVisible() {
+        return visible;
+    }
+
+    public void move() {
+        if (!visible) {
+            return;
+        }
+
+        x += dx * step;
+        y += dy * step;
+
+        if (y > Shared.SPACE_HEIGHT || (x > Shared.SPACE_WIDTH || (x - dim.getWidth()) < 0)) {
+            visible = false;
+            System.out.printf("Hide invader at: %d, %d\n", x, y);
+        }
+
+        if (visible) {
+            System.out.printf("Position  : %d, %d\n", x, y);
+        }
+    }
+
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+
+        // see javadoc for more info on the parameters
+        g.drawImage(image, 0, 0, null);
+    }
+
+    private int getRandomColumn() {
+        Random rand = new Random();
+        return rand.nextInt(Shared.SPACE_WIDTH - (int) dim.getWidth());
     }
 }
