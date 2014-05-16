@@ -42,4 +42,10 @@ public class Shoot extends JFrame {
             s1.keyReleased(e);
         }
     }  
+    public static void main(String[] args) {
+        Shoot shoot = new Shoot();
+        //Threads
+        Thread ship = new Thread(s1);
+        ship.start();
+    }
 }
