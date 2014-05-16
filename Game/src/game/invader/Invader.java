@@ -1,35 +1,33 @@
 package game.invader;
 
-import game.space.Space;
-
 import java.awt.*;
 import javax.swing.*;
+import java.util.Random;
+
+import game.space.Space;
+import game.Shared;
 
 public class Invader extends JPanel {
 
-    public static final int WIDTH = 20;
-
-    public static final int HEIGHT = 20;
-
-    public static final int DEFAULT_STEP = 1;
-
-    private int step = DEFAULT_STEP;
-
-    public static final String ICON = "invader.jpg";
+    private static final String ICON = "invader.jpg";
 
     private int dx = 0;
     private int dy = 1;
-    private int x = 0;
+    private int x;
     private int y;
+    private int step = Shared.INVADER_STEP;
     private Image image;
     private boolean visible;
+    private Dimension dim;
 
     public Invader() {
         ImageIcon icon = new ImageIcon(this.getClass().getResource(ICON));
         image = icon.getImage();
-        setPreferredSize(new Dimension(WIDTH, HEIGHT));
 
-        x = Space.getRandomColumn();
+        dim = new Dimension(Shared.INVADER_WIDTH, Shared.INVADER_HEIGHT);
+        setPreferredSize(dim);
+
+        x = getRandomColumn();
         y = 0;
         visible = true;
 
@@ -68,7 +66,7 @@ public class Invader extends JPanel {
         x += dx * step;
         y += dy * step;
 
-        if (y > Space.HEIGHT || (x > Space.WIDTH || (x - WIDTH) < 0)) {
+        if (y > Shared.SPACE_HEIGHT || (x > Shared.SPACE_WIDTH || (x - dim.getWidth()) < 0)) {
             visible = false;
             System.out.printf("Hide invader at: %d, %d\n", x, y);
         }
@@ -83,5 +81,10 @@ public class Invader extends JPanel {
 
         // see javadoc for more info on the parameters
         g.drawImage(image, 0, 0, null);
+    }
+
+    private int getRandomColumn() {
+        Random rand = new Random();
+        return rand.nextInt(Shared.SPACE_WIDTH - (int) dim.getWidth());
     }
 }

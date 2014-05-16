@@ -3,17 +3,12 @@ package game.space;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import java.util.Random;
 
-import game.invader.Invader;
+import game.Shared;
 
 public class Space extends JFrame implements KeyListener{
 
     public static final String TITLE = "Zonama Fighter";
-
-    public static final int WIDTH = 600;
-
-    public static final int HEIGHT = 400;
 
     protected SpacePanel panel;
 
@@ -21,18 +16,14 @@ public class Space extends JFrame implements KeyListener{
         return this.panel;
     }
 
-    public static int getRandomColumn() {
-        Random rand = new Random();
-        return rand.nextInt(WIDTH - Invader.WIDTH);
-    }
-
     public Space() {
+        setTitle(Shared.NAME);
         setBackground(Color.BLACK);
-        setTitle(TITLE);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         panel = new SpacePanel();
         setContentPane(panel);
-        panel.setPreferredSize(new Dimension(WIDTH, HEIGHT));
+
         setResizable(false);
         pack();
         setVisible(true);

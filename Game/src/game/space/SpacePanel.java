@@ -6,22 +6,28 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Random;
 
+import game.Shared;
 import game.invader.Invader;
 
 public class SpacePanel extends JPanel implements ActionListener {
 
-    public static final int TIMER_DELAY = 10;
-
-    protected Timer timer = new Timer(TIMER_DELAY, this);
+    protected Timer timer;
 
     protected ArrayList<Invader> invaders = new ArrayList<Invader>();
 
     private int totalMomentsCount = 0;
 
+    private Dimension dim;
+
     public SpacePanel() {
         setFocusable(true);
-        setBackground(Color.BLACK);
         setDoubleBuffered(true);
+        setBackground(Color.BLACK);
+
+        dim = new Dimension(Shared.SPACE_WIDTH, Shared.SPACE_HEIGHT);
+        setPreferredSize(dim);
+
+        timer = new Timer(Shared.TIMER_DELAY, this);
         timer.start();
     }
 
@@ -30,6 +36,10 @@ public class SpacePanel extends JPanel implements ActionListener {
         add(newInvader);
         revalidate();
         repaint();
+    }
+
+    public Dimension getDimension() {
+        return dim;
     }
 
     public void moveInvaders() {
@@ -43,7 +53,7 @@ public class SpacePanel extends JPanel implements ActionListener {
         totalMomentsCount++;
         Random rand = new Random();
         int chance = rand.nextInt(100);
-        if (totalMomentsCount % 30 == 0 && chance < 80) {
+        if (totalMomentsCount % Shared.NEW_INVADER_THRESHOLD == 0 && chance < Shared.NEW_INVADER_CHANCE) {
             addInvader(new Invader());
         }
         repaint();
