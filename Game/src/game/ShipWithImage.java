@@ -1,28 +1,25 @@
 package game;
 import java.awt.Graphics;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+import java.awt.*;
+import javax.swing.*;
 
+public class ShipWithImage extends JPanel {
 
-public class ShipWithImage extends JPanel implements ActionListener, KeyListener{ // Implement two interfaces ActionListener and KeyListener.
-
-	Timer tm = new Timer(5, this); //Timer object is used for animation. This is refer to ActionListener
-    int x = 0, y = 0, velX = 0, velY = 0; // Position of the rectangle by default.
+    int x = Shared.SPACE_WIDTH / 2, y = Shared.SPACE_HEIGHT - 64, velX = 0, velY = 0; // Position of the rectangle by default.
                                          // The rectangle will be into the top left corner from the window.
                                           // velX is the speed of rectangle horizontaly.
                                           // velY is the speed of rectangle by Y.
-    String fileName = "F:\\JavaEclipse\\Moving\\images\\spaceship.png";
+    String fileName = "spaceship.png";
     java.awt.Image img = getToolkit().getImage(fileName);
     
     public ShipWithImage() {
-    	tm.start();    // start the timer. Here we began the animation process.
-        addKeyListener(this); // This refer to KeyListener interface.
-        setFocusable(true); // Enable the KeyListener.
-        setFocusTraversalKeysEnabled(false); // Used shift key.
+        ImageIcon icon = new ImageIcon(this.getClass().getResource(fileName));
+        img = icon.getImage();
+
+        Dimension dim = new Dimension(64, 64);
+        setPreferredSize(dim);
     }
     
     public void paintComponent(Graphics g) {
@@ -30,12 +27,41 @@ public class ShipWithImage extends JPanel implements ActionListener, KeyListener
     	super.paintComponent(g);
 //        g.setColor(Color.RED); // Set the color of rectangle to Red.
 //        g.fillRect(x, y, 50, 30); // The real size of the movement object. In our case this is rectangle.
-    	g.drawImage(img, x, y, null);
+    	g.drawImage(img, 0, 0, null);
     	
     }
+
+    public void moveLeft() {
+      velX = -1;
+      velY = 0;
+      performMove();
+    }
+
+    public void moveRight() {
+      velX = 1;
+      velY = 0;
+      performMove();
+    }
+
+    public void moveUp() {
+      velX = 0;
+      velY = -1;
+      performMove();
+    }
+
+    public void moveDown() {
+      velX = 0;
+      velY = 1;
+      performMove();
+    }
     
+    public void reset() {
+      velX = 0;
+      velY = 0;
+    }
+
     //Here we start to use ActionListener interface.
-    public void actionPerformed(ActionEvent e) {
+    public void performMove() {
        // Restrictions for rectangle movement into to whole area.
        if (x < 0) {//if the rectangle on the left side on the screen and outside of the visible area.
          velX = 0;
@@ -63,39 +89,4 @@ public class ShipWithImage extends JPanel implements ActionListener, KeyListener
         
         repaint();
     }
-    
-    public void keyPressed(KeyEvent e) {
-       int c = e.getKeyCode(); // Get the button from the keyboard.
-       
-       if (c == KeyEvent.VK_LEFT) { // for left key
-        velX = -1;
-        velY = 0;
-       }
-       
-       if (c == KeyEvent.VK_UP) { // for up key
-        velX = 0;
-        velY = -1;
-       }
-       
-       if (c == KeyEvent.VK_RIGHT) { // for right key
-        velX = 1;
-        velY = 0;
-       }
-       
-       if (c == KeyEvent.VK_DOWN) { // for down key
-        velX = 0;
-        velY = 1;
-       }
-    }
-    
-    public void keyTyped(KeyEvent e) {
-        //none
-    }
-    public void keyReleased(KeyEvent e) {
-       velX = 0;
-       velY = 0;
-    }
-    
-    
-   
 }

@@ -7,9 +7,10 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import game.Shared;
+import game.ShipWithImage;
 import game.invader.Invader;
 
-public class SpacePanel extends JPanel implements ActionListener {
+public class SpacePanel extends JPanel implements ActionListener, KeyListener {
 
     protected Timer timer;
 
@@ -19,13 +20,26 @@ public class SpacePanel extends JPanel implements ActionListener {
 
     private Dimension dim;
 
+    private ShipWithImage ship;
+
     public SpacePanel() {
         setFocusable(true);
+        // Used shift key.
+        setFocusTraversalKeysEnabled(false);
+
+        // This refer to KeyListener interface.
+        addKeyListener(this);
+
         setDoubleBuffered(true);
         setBackground(Color.BLACK);
 
         dim = new Dimension(Shared.SPACE_WIDTH, Shared.SPACE_HEIGHT);
         setPreferredSize(dim);
+
+        ship = new ShipWithImage();
+        add(ship);
+        revalidate();
+        repaint();
 
         timer = new Timer(Shared.TIMER_DELAY, this);
         timer.start();
@@ -58,4 +72,38 @@ public class SpacePanel extends JPanel implements ActionListener {
         }
         repaint();
     }
+
+    public void keyPressed(KeyEvent event) {
+        // Get the button from the keyboard.
+        int keyCode = event.getKeyCode();
+
+        switch (keyCode) {
+            case KeyEvent.VK_LEFT:
+                ship.moveLeft();
+            break;
+
+            case KeyEvent.VK_RIGHT:
+                ship.moveRight();
+            break;
+
+            case KeyEvent.VK_UP:
+                ship.moveUp();
+            break;
+
+            case KeyEvent.VK_DOWN:
+                ship.moveDown();
+            break;
+        }
+
+        revalidate();
+        repaint();
+    }
+    
+    public void keyTyped(KeyEvent event) {
+        // none
+    }
+    public void keyReleased(KeyEvent event) {
+        ship.reset();
+    }
+
 }
