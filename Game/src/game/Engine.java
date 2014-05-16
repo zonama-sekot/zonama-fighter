@@ -15,6 +15,5 @@ public class Engine {
 
     public void Start() {
         this.gameSpace = new Space();
-        this.gameSpace.addInvaders(15);
     }
 }

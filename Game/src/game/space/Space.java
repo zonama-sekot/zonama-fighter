@@ -17,7 +17,7 @@ public class Space extends JFrame implements KeyListener{
 
     protected SpacePanel panel;
 
-    public SpacePanel getPanel(){
+    public SpacePanel getPanel() {
         return this.panel;
     }
 
@@ -27,25 +27,18 @@ public class Space extends JFrame implements KeyListener{
     }
 
     public Space() {
-        setLayout(new BorderLayout());
+        setBackground(Color.BLACK);
         setTitle(TITLE);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         panel = new SpacePanel();
         setContentPane(panel);
         panel.setPreferredSize(new Dimension(WIDTH, HEIGHT));
-        panel.setLayout(null);
-        pack();
         setResizable(false);
+        pack();
         setVisible(true);
-        panel.startTimer();
 
-        addKeyListener(this); // This refer to KeyListener interface.
-    }
-
-    public void addInvaders(int invadersCount){
-        for (int i = 0; i < invadersCount; i++) {
-            this.getPanel().addInvader(Invader.createInvader());
-        }
+        // This refer to KeyListener interface.
+        addKeyListener(this);
     }
 
     @Override
