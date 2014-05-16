@@ -4,26 +4,29 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.Random;
 
 import game.invader.Invader;
 
 public class SpacePanel extends JPanel implements ActionListener {
 
-    public static final int TIMER_DELAY = 1000;
+    public static final int TIMER_DELAY = 10;
 
     protected Timer timer = new Timer(TIMER_DELAY, this);
 
     protected ArrayList<Invader> invaders = new ArrayList<Invader>();
 
-    LayoutManager layout = new BorderLayout();
+    private int totalMomentsCount = 0;
 
     public SpacePanel() {
-        setLayout(layout);
+        setFocusable(true);
+        setBackground(Color.BLACK);
+        setDoubleBuffered(true);
+        timer.start();
     }
 
     public void addInvader(Invader newInvader) {
         invaders.add(newInvader);
-        setLayout(layout);
         add(newInvader);
         revalidate();
         repaint();
@@ -31,19 +34,18 @@ public class SpacePanel extends JPanel implements ActionListener {
 
     public void moveInvaders() {
         for (Invader invader : invaders) {
-            invader.moveDown();
-            if (invader.getY() > HEIGHT) {
-                invaders.remove(invader);
-            }
+            invader.move();
         }
-    }
-
-    public void startTimer() {
-        timer.start();
     }
 
     public void actionPerformed(ActionEvent event) {
         moveInvaders();
-        addInvader(Invader.createInvader());
+        totalMomentsCount++;
+        Random rand = new Random();
+        int chance = rand.nextInt(100);
+        if (totalMomentsCount % 30 == 0 && chance < 80) {
+            addInvader(new Invader());
+        }
+        repaint();
     }
 }
