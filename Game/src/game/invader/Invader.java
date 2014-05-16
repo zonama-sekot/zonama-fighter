@@ -7,55 +7,81 @@ import javax.swing.*;
 
 public class Invader extends JPanel {
 
-    public static final Color DEFAULT_BACKGROUND = Color.MAGENTA;
+    public static final int WIDTH = 20;
 
-    public static final int WIDTH = 10;
+    public static final int HEIGHT = 20;
 
-    public static final int HEIGHT = 10;
+    public static final int DEFAULT_STEP = 1;
 
-    public static final int DEFAULT_STEP = HEIGHT;
+    private int step = DEFAULT_STEP;
 
-    int step = DEFAULT_STEP;
+    public static final String ICON = "invader.jpg";
 
-    int x = 0;
-
-    int y = 0;
+    private int dx = 0;
+    private int dy = 1;
+    private int x = 0;
+    private int y;
+    private Image image;
+    private boolean visible;
 
     public Invader() {
-        setLayout(null);
+        ImageIcon icon = new ImageIcon(this.getClass().getResource(ICON));
+        image = icon.getImage();
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
+
+        x = Space.getRandomColumn();
+        y = 0;
+        visible = true;
+
+        System.out.printf("New column: %s\n", x);
     }
-	
+
     public int getStep() {
         return step;
     }
 
-    public Invader setStep(int step) {
+    public void setStep(int step) {
         this.step = step;
-        return this;
     }
 
-    public void setX(int x) {
-        System.out.printf("New column: %s\n", x);
-        this.x = x;
+    public int getX() {
+        return x;
     }
 
-    public Invader moveDown() {
-        y += step;
-        repaint();
-        System.out.printf("Position  : %d, %d\n", x, y);
-        return this;
+    public int getY() {
+        return y;
     }
 
-    public void paintComponent(Graphics graphics) {
-        super.paintComponent(graphics);
-        graphics.setColor(Color.MAGENTA);
-        graphics.fillRect(x, y, WIDTH, HEIGHT);
+    public Image getImage() {
+        return image;
     }
 
-    public static Invader createInvader() {
-        Invader invader = new Invader();
-        invader.setX(Space.getRandomColumn());
-        return invader;
+    public boolean isVisible() {
+        return visible;
+    }
+
+    public void move() {
+        if (!visible) {
+            return;
+        }
+
+        x += dx * step;
+        y += dy * step;
+
+        if (y > Space.HEIGHT || (x > Space.WIDTH || (x - WIDTH) < 0)) {
+            visible = false;
+            System.out.printf("Hide invader at: %d, %d\n", x, y);
+        }
+
+        if (visible) {
+            System.out.printf("Position  : %d, %d\n", x, y);
+        }
+    }
+
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+
+        // see javadoc for more info on the parameters
+        g.drawImage(image, 0, 0, null);
     }
 }
