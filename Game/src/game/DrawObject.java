@@ -35,20 +35,20 @@ public class DrawObject extends JFrame {
 		public void keyPressed(KeyEvent e){
 			int key=e.getKeyCode();
 
-			if (key==e.VK_LEFT){
+			if (key==KeyEvent.VK_LEFT){
 
 				x--;
 			}
-			if (key==e.VK_RIGHT){
+			if (key==KeyEvent.VK_RIGHT){
 
 				x++;
 
 			}
-			if (key==e.VK_UP){
+			if (key==KeyEvent.VK_UP){
 
 				y--;
 			}
-			if (key==e.VK_DOWN){
+			if (key==KeyEvent.VK_DOWN){
 				y++;
 			}
 		}
