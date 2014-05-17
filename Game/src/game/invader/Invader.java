@@ -31,14 +31,6 @@ public class Invader extends MovablePanel {
         setSpeed(Shared.INVADER_SPEED);
     }
 
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
     public Image getImage() {
         return image;
     }
@@ -66,11 +58,11 @@ public class Invader extends MovablePanel {
         }
     }
 
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
+    protected void paintComponent(Graphics graphics) {
+        super.paintComponent(graphics);
 
         // see javadoc for more info on the parameters
-        g.drawImage(image, 0, 0, null);
+        graphics.drawImage(image, 0, 0, null);
     }
 
     private int getRandomColumn() {

@@ -9,7 +9,7 @@ public interface Shared {
 
     public static final int FIGHTER_WIDTH = 64;
     public static final int FIGHTER_HEIGHT = 64;
-    public static final int FIGHTER_SPEED = 2;
+    public static final int FIGHTER_SPEED = 5;
 
     public static final int INVADER_WIDTH = 20;
     public static final int INVADER_HEIGHT = 20;

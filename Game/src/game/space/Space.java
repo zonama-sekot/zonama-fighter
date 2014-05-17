@@ -25,11 +25,12 @@ public class Space extends JFrame implements KeyListener {
         setContentPane(panel);
 
         setResizable(false);
-        pack();
-        setVisible(true);
 
         // This refers to the KeyListener interface.
         addKeyListener(this);
+
+        pack();
+        setVisible(true);
     }
 
     @Override

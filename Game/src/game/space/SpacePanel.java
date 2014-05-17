@@ -23,10 +23,6 @@ public class SpacePanel extends JPanel implements ActionListener {
     private ShipWithImage ship;
 
     public SpacePanel() {
-        setFocusable(true);
-        // Used shift key.
-        setFocusTraversalKeysEnabled(false);
-
         setDoubleBuffered(true);
         setBackground(Color.BLACK);
 
@@ -84,11 +80,11 @@ public class SpacePanel extends JPanel implements ActionListener {
             break;
 
             case KeyEvent.VK_UP:
-                ship.moveRight();
+                ship.moveUp();
             break;
 
             case KeyEvent.VK_RIGHT:
-                ship.moveUp();
+                ship.moveRight();
             break;
 
             case KeyEvent.VK_DOWN:
@@ -96,7 +92,7 @@ public class SpacePanel extends JPanel implements ActionListener {
             break;
         }
 
-        revalidate();
+        // revalidate();
         repaint();
     }
 }

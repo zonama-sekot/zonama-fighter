@@ -51,11 +51,47 @@ public abstract class MovablePanel extends JPanel implements IMovable {
     }
 
     /**
-     * 
+     * Perform the actual move
      */
     protected void performMove() {
         x += directionX * speed;
         y += directionY * speed;
+    }
+
+    /**
+     * Get X coordinate
+     *
+     * @return int x
+     */
+    public int getX() {
+        return x;
+    }
+
+    /**
+     * Get Y coordinate
+     *
+     * @return int y
+     */
+    public int getY() {
+        return y;
+    }
+
+    /**
+     * Get X direction
+     *
+     * @return int directionX
+     */
+    public int getDirectionX() {
+        return x;
+    }
+
+    /**
+     * Get Y direction
+     *
+     * @return int directionY
+     */
+    public int getDirectionY() {
+        return y;
     }
 
     /**
