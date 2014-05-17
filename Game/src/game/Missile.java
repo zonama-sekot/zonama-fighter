@@ -28,7 +28,7 @@ public class Missile extends MovablePanel {
     /**
      * Constant holding the relative path to the invader image
      */
-    private static final String ICON = "missile.jpg";
+    private static final String ICON = "missile.png";
 
     /**
      * Holding the Image instance of the invader.
