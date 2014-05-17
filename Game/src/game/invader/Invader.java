@@ -5,7 +5,10 @@ import javax.swing.*;
 import java.util.Random;
 
 import game.Shared;
+import game.IPane;
 import game.MovablePanel;
+import game.space.SpacePanel;
+import game.ShipWithImage;
 
 /**
  * I am an invader.
@@ -103,6 +106,35 @@ public class Invader extends MovablePanel {
         if (y > Shared.SPACE_HEIGHT || (x > Shared.SPACE_WIDTH || (x - dimension.getWidth()) < 0)) {
             visible = false;
         }
+
+        if (visible) {
+            SpacePanel parent = (SpacePanel) getParent();
+            ShipWithImage ship = parent.getShip();
+
+            if (checkCollision(ship)) {
+                parent.getTimer().stop();
+            }
+        }
+    }
+
+
+    /**
+     * Check if the invader collisions with something
+     *
+     * @param  IPane page the object to check collisions with
+     * @return boolean
+     */
+    protected boolean checkCollision(IPane pane) {
+        Dimension paneDimension = pane.getDimension();
+        int invaderWidth = (int) dimension.getWidth();
+        int invaderHeight = (int) dimension.getHeight();
+        int paneWidth = (int) paneDimension.getWidth();
+        int paneHeight = (int) paneDimension.getHeight();
+
+        return getX() < pane.getX() + paneWidth
+            && getX() + invaderWidth > pane.getX()
+            &&  getY() < pane.getY() + paneHeight
+            && getY() + invaderHeight > pane.getY();
     }
 
     /**
