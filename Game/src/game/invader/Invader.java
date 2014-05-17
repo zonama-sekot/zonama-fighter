@@ -116,6 +116,8 @@ public class Invader extends MovablePanel {
      * This is automatically called from the super class
      * when a repain should happen.
      *
+     * It repaints the image so it is always visible.
+     *
      * @param Graphics graphics
      */
     protected void paintComponent(Graphics graphics) {

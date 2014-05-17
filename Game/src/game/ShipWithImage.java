@@ -5,13 +5,39 @@ import javax.swing.JPanel;
 import java.awt.*;
 import javax.swing.*;
 
-public class ShipWithImage extends MovablePanel implements IMovable {
+/**
+ * I am a ship.
+ * I am initially possitioned at the bottom center of the Space.
+ * I move around, but I cannot leave the Space (extend MovablePanel)
+ * I have the looks of a spacecraft with an Image.
+ * I should shoot and kill invaders, *but not yet*.
+ */
+public class ShipWithImage extends MovablePanel {
 
+    /**
+     * Hold a relative path to the spaceship image.
+     */
     private static final String ICON = "spaceship.png";
 
+    /**
+     * Holding the Image instance of the ship.
+     * It should be repainted on every paint (with paintComponent())
+     * so it is always visible even when the ship moves.
+     */
     private Image image;
+
+    /**
+     * Dimensions of the ship.
+     */
     private Dimension dim;
 
+    /**
+     * Initialize the ship:
+     *  - create and set the image from the path
+     *  - set the size with a dimension
+     *  - position at the bottom center of the space
+     *  - set the initial speed
+     */
     public ShipWithImage() {
         ImageIcon icon = new ImageIcon(this.getClass().getResource(ICON));
         image = icon.getImage();
@@ -25,6 +51,15 @@ public class ShipWithImage extends MovablePanel implements IMovable {
         speed = Shared.FIGHTER_SPEED;
     }
 
+    /**
+     * Perform additional paint operations on every JPanel repaint()
+     * This is automatically called from the super class
+     * when a repain should happen.
+     *
+     * It repaints the image so it is always visible.
+     *
+     * @param Graphics graphics
+     */
     public void paintComponent(Graphics graphics) {
     	super.paintComponent(graphics);
     	graphics.drawImage(image, 0, 0, null);
