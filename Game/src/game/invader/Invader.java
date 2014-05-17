@@ -4,7 +4,6 @@ import java.awt.*;
 import javax.swing.*;
 import java.util.Random;
 
-import game.space.Space;
 import game.Shared;
 import game.MovablePanel;
 
@@ -40,11 +39,6 @@ public class Invader extends MovablePanel {
     private boolean visible;
 
     /**
-     * Dimensions of the invader - its width and height.
-     */
-    private Dimension dim;
-
-    /**
      * Constructor to initialize the invader.
      *
      * Set the Image instance from the ICON.
@@ -58,8 +52,8 @@ public class Invader extends MovablePanel {
         image = icon.getImage();
 
         // Invader defaults
-        dim = new Dimension(Shared.INVADER_WIDTH, Shared.INVADER_HEIGHT);
-        setPreferredSize(dim);
+        dimension = new Dimension(Shared.INVADER_WIDTH, Shared.INVADER_HEIGHT);
+        setPreferredSize(dimension);
 
         x = getRandomColumn();
         y = 0;
@@ -106,7 +100,7 @@ public class Invader extends MovablePanel {
         // **NOTE**: Not checking the top side at the moment for simplicity
         // The invader should not go up and it's actually coming from the top
         // side and it should be visible initially
-        if (y > Shared.SPACE_HEIGHT || (x > Shared.SPACE_WIDTH || (x - dim.getWidth()) < 0)) {
+        if (y > Shared.SPACE_HEIGHT || (x > Shared.SPACE_WIDTH || (x - dimension.getWidth()) < 0)) {
             visible = false;
         }
     }
@@ -137,6 +131,6 @@ public class Invader extends MovablePanel {
      */
     private int getRandomColumn() {
         Random rand = new Random();
-        return rand.nextInt(Shared.SPACE_WIDTH - (int) dim.getWidth());
+        return rand.nextInt(Shared.SPACE_WIDTH - (int) dimension.getWidth());
     }
 }
