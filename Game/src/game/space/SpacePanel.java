@@ -31,8 +31,6 @@ public class SpacePanel extends JPanel implements ActionListener {
 
         ship = new ShipWithImage();
         add(ship);
-        revalidate();
-        repaint();
 
         timer = new Timer(Shared.TIMER_DELAY, this);
         timer.start();
@@ -91,8 +89,5 @@ public class SpacePanel extends JPanel implements ActionListener {
                 ship.moveDown();
             break;
         }
-
-        // revalidate();
-        repaint();
     }
 }
