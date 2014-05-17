@@ -2,6 +2,16 @@ package game;
 
 import javax.swing.JPanel;
 
+/**
+ * I am a MovablePanel:
+ *  - I move
+ *  - I have a position (x,y)
+ *  - I have a direction (x,y)
+ *  - I have a speed (pixels in direction per move)
+ *
+ * If you need my move behavior
+ * you could ovveride my protected `performMove()` method.
+ */
 public abstract class MovablePanel extends JPanel implements IMovable {
 
     protected int directionX;
