@@ -6,16 +6,40 @@ import javax.swing.*;
 
 import game.Shared;
 
+/**
+ * I am a space - the main entry to the ship and the invaders
+ *
+ * I hold a single SpacePanel and I resize to its size with pack().
+ * (Found this to be listed as best practice - don't know why though :-/ )
+ * I listen to keyboard events (wiht KeyListener)
+ * and pass them to the SpacePanel.
+ */
 public class Space extends JFrame implements KeyListener {
 
-    public static final String TITLE = "Zonama Fighter";
-
+    /**
+     * The single SpacePanel I hold.
+     */
     protected SpacePanel panel;
 
+    /**
+     * Get the space panel
+     *
+     * @return SpacePanel
+     */
     public SpacePanel getPanel() {
         return this.panel;
     }
 
+    /**
+     * Initializing of the Space:
+     *  - set title of the window
+     *  - set background
+     *  - exit the application when the frame is closed
+     *  - create and set the SpacePanel to be the content pane of the frame
+     *  - initialize the listenting to keys
+     *  - disable resize
+     *  - pack and show
+     */
     public Space() {
         setTitle(Shared.NAME);
         setBackground(Color.BLACK);
@@ -33,6 +57,13 @@ public class Space extends JFrame implements KeyListener {
         setVisible(true);
     }
 
+    /*
+     * KeyListener methods
+     * ====================
+     *
+     * We need to catch only the keyPressed
+     */
+
     @Override
     public void keyTyped(KeyEvent event) {
 
@@ -40,6 +71,7 @@ public class Space extends JFrame implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent event) {
+        // Notify the panel of the event
         this.getPanel().notifyForKeyPressed(event);
     }
 

@@ -100,12 +100,12 @@ public class Invader extends MovablePanel {
 
         super.performMove();
 
-        // If below bottom side or completely after the side edges - 
+        // If below bottom side or completely after the side edges -
         // hide the invader
-        // 
+        //
         // **NOTE**: Not checking the top side at the moment for simplicity
         // The invader should not go up and it's actually coming from the top
-        // side and it should be visible initially 
+        // side and it should be visible initially
         if (y > Shared.SPACE_HEIGHT || (x > Shared.SPACE_WIDTH || (x - dim.getWidth()) < 0)) {
             visible = false;
         }
