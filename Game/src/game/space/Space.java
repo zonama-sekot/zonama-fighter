@@ -6,7 +6,7 @@ import javax.swing.*;
 
 import game.Shared;
 
-public class Space extends JFrame implements KeyListener{
+public class Space extends JFrame implements KeyListener {
 
     public static final String TITLE = "Zonama Fighter";
 
@@ -28,34 +28,22 @@ public class Space extends JFrame implements KeyListener{
         pack();
         setVisible(true);
 
-        // This refer to KeyListener interface.
+        // This refers to the KeyListener interface.
         addKeyListener(this);
     }
 
     @Override
-    public void keyTyped(KeyEvent e) {
+    public void keyTyped(KeyEvent event) {
 
     }
 
     @Override
-    public void keyPressed(KeyEvent e) {
-        int c = e.getKeyCode(); // Get the button from the keyboard.
-
-        if (c == KeyEvent.VK_LEFT) { // for left key
-        }
-
-        if (c == KeyEvent.VK_UP) { // for up key
-        }
-
-        if (c == KeyEvent.VK_RIGHT) { // for right key
-        }
-
-        if (c == KeyEvent.VK_DOWN) { // for down key
-        }
+    public void keyPressed(KeyEvent event) {
+        this.getPanel().notifyForKeyPressed(event);
     }
 
     @Override
-    public void keyReleased(KeyEvent e) {
+    public void keyReleased(KeyEvent event) {
 
     }
 }

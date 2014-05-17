@@ -10,7 +10,7 @@ import game.Shared;
 import game.ShipWithImage;
 import game.invader.Invader;
 
-public class SpacePanel extends JPanel implements ActionListener, KeyListener {
+public class SpacePanel extends JPanel implements ActionListener {
 
     protected Timer timer;
 
@@ -26,9 +26,6 @@ public class SpacePanel extends JPanel implements ActionListener, KeyListener {
         setFocusable(true);
         // Used shift key.
         setFocusTraversalKeysEnabled(false);
-
-        // This refer to KeyListener interface.
-        addKeyListener(this);
 
         setDoubleBuffered(true);
         setBackground(Color.BLACK);
@@ -56,14 +53,14 @@ public class SpacePanel extends JPanel implements ActionListener, KeyListener {
         return dim;
     }
 
-    public void moveInvaders() {
+    public void moveInvadersDown() {
         for (Invader invader : invaders) {
-            invader.move();
+            invader.moveDown();
         }
     }
 
     public void actionPerformed(ActionEvent event) {
-        moveInvaders();
+        moveInvadersDown();
         totalMomentsCount++;
         Random rand = new Random();
         int chance = rand.nextInt(100);
@@ -73,8 +70,12 @@ public class SpacePanel extends JPanel implements ActionListener, KeyListener {
         repaint();
     }
 
-    public void keyPressed(KeyEvent event) {
-        // Get the button from the keyboard.
+    /**
+     * Pass a key event and it would call the correct move method on the fighter
+     *
+     * @param KeyEvent
+     */
+    public void notifyForKeyPressed(KeyEvent event) {
         int keyCode = event.getKeyCode();
 
         switch (keyCode) {
@@ -82,11 +83,11 @@ public class SpacePanel extends JPanel implements ActionListener, KeyListener {
                 ship.moveLeft();
             break;
 
-            case KeyEvent.VK_RIGHT:
+            case KeyEvent.VK_UP:
                 ship.moveRight();
             break;
 
-            case KeyEvent.VK_UP:
+            case KeyEvent.VK_RIGHT:
                 ship.moveUp();
             break;
 
@@ -98,12 +99,4 @@ public class SpacePanel extends JPanel implements ActionListener, KeyListener {
         revalidate();
         repaint();
     }
-    
-    public void keyTyped(KeyEvent event) {
-        // none
-    }
-    public void keyReleased(KeyEvent event) {
-        ship.reset();
-    }
-
 }

@@ -6,40 +6,29 @@ import java.util.Random;
 
 import game.space.Space;
 import game.Shared;
+import game.MovablePanel;
 
-public class Invader extends JPanel {
+public class Invader extends MovablePanel {
 
     private static final String ICON = "invader.jpg";
 
-    private int dx = 0;
-    private int dy = 1;
-    private int x;
-    private int y;
-    private int step = Shared.INVADER_STEP;
     private Image image;
     private boolean visible;
     private Dimension dim;
 
     public Invader() {
+        // Set an image
         ImageIcon icon = new ImageIcon(this.getClass().getResource(ICON));
         image = icon.getImage();
 
+        // Invader defaults
         dim = new Dimension(Shared.INVADER_WIDTH, Shared.INVADER_HEIGHT);
         setPreferredSize(dim);
 
         x = getRandomColumn();
         y = 0;
         visible = true;
-
-        System.out.printf("New column: %s\n", x);
-    }
-
-    public int getStep() {
-        return step;
-    }
-
-    public void setStep(int step) {
-        this.step = step;
+        setSpeed(Shared.INVADER_SPEED);
     }
 
     public int getX() {
@@ -58,21 +47,22 @@ public class Invader extends JPanel {
         return visible;
     }
 
-    public void move() {
+    @Override
+    protected void performMove() {
         if (!visible) {
             return;
         }
 
-        x += dx * step;
-        y += dy * step;
+        super.performMove();
 
+        // If below bottom side or completely after the side edges - 
+        // hide the invader
+        // 
+        // **NOTE**: Not checking the top side at the moment for simplicity
+        // The invader should not go up and it's actually coming from the top
+        // side and it should be visible initially 
         if (y > Shared.SPACE_HEIGHT || (x > Shared.SPACE_WIDTH || (x - dim.getWidth()) < 0)) {
             visible = false;
-            System.out.printf("Hide invader at: %d, %d\n", x, y);
-        }
-
-        if (visible) {
-            System.out.printf("Position  : %d, %d\n", x, y);
         }
     }
 
