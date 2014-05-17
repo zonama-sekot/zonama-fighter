@@ -88,7 +88,7 @@ public class SpacePanel extends JPanel implements ActionListener {
         revalidate();
         repaint();
     }
-    
+
     public void addMissile(Missile newMissile) {
         missiles.add(newMissile);
         add(newMissile);
@@ -115,7 +115,7 @@ public class SpacePanel extends JPanel implements ActionListener {
             invader.moveDown();
         }
     }
-    
+
     public void moveMissilesUp() {
         for (Missile missile: missiles) {
             missile.moveUp();
@@ -126,7 +126,7 @@ public class SpacePanel extends JPanel implements ActionListener {
      * Called by the Timer because of the ActionListener interface
      *
      * Every tick I move the invaders down and create a new invader.
-     * 
+     *
      * @param ActionEvent event
      */
     public void actionPerformed(ActionEvent event) {
@@ -182,9 +182,9 @@ public class SpacePanel extends JPanel implements ActionListener {
             case KeyEvent.VK_DOWN:
                 ship.moveDown();
             break;
-            
+
             case KeyEvent.VK_SPACE:
-            	addMissile(new Missile(ship.getX(), ship.getY()));
+                addMissile(new Missile(ship.getX(), ship.getY()));
             break;
         }
     }
