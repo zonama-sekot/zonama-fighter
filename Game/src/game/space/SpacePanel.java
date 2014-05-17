@@ -2,10 +2,13 @@ package game.space;
 
 import java.awt.*;
 import java.awt.event.*;
+
 import javax.swing.*;
+
 import java.util.ArrayList;
 import java.util.Random;
 
+import game.Missile;
 import game.Shared;
 import game.ShipWithImage;
 import game.invader.Invader;
@@ -32,6 +35,7 @@ public class SpacePanel extends JPanel implements ActionListener {
      * All the invaders on the SpacePanel.
      */
     protected ArrayList<Invader> invaders = new ArrayList<Invader>();
+    protected ArrayList<Missile> missiles = new ArrayList<Missile>();
 
     /**
      * Total count of the ticks
@@ -84,6 +88,13 @@ public class SpacePanel extends JPanel implements ActionListener {
         revalidate();
         repaint();
     }
+    
+    public void addMissile(Missile newMissile) {
+        missiles.add(newMissile);
+        add(newMissile);
+        revalidate();
+        repaint();
+    }
 
     /**
      * Get my dimensions
@@ -104,6 +115,12 @@ public class SpacePanel extends JPanel implements ActionListener {
             invader.moveDown();
         }
     }
+    
+    public void moveMissilesUp() {
+        for (Missile missile: missiles) {
+            missile.moveUp();
+        }
+    }
 
     /**
      * Called by the Timer because of the ActionListener interface
@@ -115,6 +132,7 @@ public class SpacePanel extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent event) {
         totalMomentsCount++;
         moveInvadersDown();
+        moveMissilesUp();
         if (shouldCreateInvader()) {
             addInvader(new Invader());
         }
@@ -163,6 +181,10 @@ public class SpacePanel extends JPanel implements ActionListener {
 
             case KeyEvent.VK_DOWN:
                 ship.moveDown();
+            break;
+            
+            case KeyEvent.VK_SPACE:
+            	addMissile(new Missile(ship.getX(), ship.getY()));
             break;
         }
     }
