@@ -23,4 +23,8 @@ public interface Shared {
 
     public static final int NEW_INVADER_THRESHOLD = 30;
     public static final double NEW_INVADER_CHANCE = 80;
+
+    public static final int MISSILE_WIDTH = 15;
+    public static final int MISSILE_HEIGHT = 15;
+    public static final int MISSILE_SPEED = 10;
 }
