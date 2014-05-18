@@ -2,14 +2,12 @@ package game.space;
 
 import java.awt.*;
 import java.awt.event.*;
-
 import javax.swing.*;
-
 import java.util.ArrayList;
 import java.util.Random;
 
-import game.Missile;
 import game.Shared;
+import game.IDimensional;
 import game.ShipWithImage;
 import game.invader.Invader;
 
@@ -24,7 +22,7 @@ import game.invader.Invader;
  *  - I move invaders down the space.
  *  - I create new invaders (not every tick)
  */
-public class SpacePanel extends JPanel implements ActionListener {
+public class SpacePanel extends JPanel implements ActionListener, IDimensional {
 
     /**
      * The Timer instance which I use to tick.
@@ -35,7 +33,6 @@ public class SpacePanel extends JPanel implements ActionListener {
      * All the invaders on the SpacePanel.
      */
     protected ArrayList<Invader> invaders = new ArrayList<Invader>();
-    protected ArrayList<Missile> missiles = new ArrayList<Missile>();
 
     /**
      * Total count of the ticks
@@ -47,7 +44,7 @@ public class SpacePanel extends JPanel implements ActionListener {
     /**
      * My dimensions
      */
-    private Dimension dim;
+    private Dimension dimension;
 
     /**
      * The ship which I move
@@ -66,8 +63,8 @@ public class SpacePanel extends JPanel implements ActionListener {
         setDoubleBuffered(true);
         setBackground(Color.BLACK);
 
-        dim = new Dimension(Shared.SPACE_WIDTH, Shared.SPACE_HEIGHT);
-        setPreferredSize(dim);
+        dimension = new Dimension(Shared.SPACE_WIDTH, Shared.SPACE_HEIGHT);
+        setPreferredSize(dimension);
 
         ship = new ShipWithImage();
         add(ship);
@@ -88,21 +85,41 @@ public class SpacePanel extends JPanel implements ActionListener {
         revalidate();
         repaint();
     }
-    
-    public void addMissile(Missile newMissile) {
-        missiles.add(newMissile);
-        add(newMissile);
-        revalidate();
-        repaint();
-    }
 
     /**
-     * Get my dimensions
+     * Get the dimension
      *
      * @return Dimension
      */
     public Dimension getDimension() {
-        return dim;
+        return dimension;
+    }
+
+    /**
+     * Set the dimension
+     *
+     * @param Dimension
+     */
+    public void setDimension(Dimension dimension) {
+        this.dimension = dimension;
+    }
+
+    /**
+     * Get the ship
+     *
+     * @return ShipWithImage
+     */
+    public ShipWithImage getShip() {
+        return ship;
+    }
+
+    /**
+     * Get the timer
+     *
+     * @return Timer
+     */
+    public Timer getTimer() {
+        return timer;
     }
 
     /**
@@ -113,12 +130,6 @@ public class SpacePanel extends JPanel implements ActionListener {
     public void moveInvadersDown() {
         for (Invader invader : invaders) {
             invader.moveDown();
-        }
-    }
-    
-    public void moveMissilesUp() {
-        for (Missile missile: missiles) {
-            missile.moveUp();
         }
     }
 
@@ -132,7 +143,6 @@ public class SpacePanel extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent event) {
         totalMomentsCount++;
         moveInvadersDown();
-        moveMissilesUp();
         if (shouldCreateInvader()) {
             addInvader(new Invader());
         }
@@ -181,10 +191,6 @@ public class SpacePanel extends JPanel implements ActionListener {
 
             case KeyEvent.VK_DOWN:
                 ship.moveDown();
-            break;
-            
-            case KeyEvent.VK_SPACE:
-            	addMissile(new Missile(ship.getX(), ship.getY()));
             break;
         }
     }
