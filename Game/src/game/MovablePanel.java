@@ -27,6 +27,8 @@ public abstract class MovablePanel extends JPanel implements IMovable, IPane {
 
     protected Dimension dimension;
 
+    protected Image image;
+
     /**
      * {@inheritDoc}
      */
@@ -140,6 +142,75 @@ public abstract class MovablePanel extends JPanel implements IMovable, IPane {
      */
     public void setDimension(Dimension dimension) {
         this.dimension = dimension;
+        setPreferredSize(this.dimension);
     }
 
+    /**
+     * Set the dimension from integers
+     *
+     * @param int width
+     * @param int height
+     */
+    public void setDimension(int width, int height) {
+        this.dimension = new Dimension(width, height);
+        setPreferredSize(this.dimension);
+    }
+
+    /**
+     * Get the image instance.
+     *
+     * @return Image
+     */
+    public Image getImage() {
+        return image;
+    }
+
+    /**
+     * Set the image instance.
+     *
+     * @return Image
+     */
+    protected void setImage(Image image) {
+        this.image = image;
+    }
+
+    protected void setImageFromPath(String path) {
+        ImageIcon icon = new ImageIcon(this.getClass().getResource(path));
+        setImage(icon.getImage());
+    }
+
+    /**
+     * Perform additional paint operations on every JPanel repaint()
+     * This is automatically called from the super class
+     * when a repain should happen.
+     *
+     * It repaints the image so it is always visible.
+     *
+     * @param Graphics graphics
+     */
+    protected void paintComponent(Graphics graphics) {
+        super.paintComponent(graphics);
+
+        // see javadoc for more info on the parameters
+        graphics.drawImage(getImage(), 0, 0, null);
+    }
+
+    /**
+     * Check if the panel collisions with something
+     *
+     * @param  IPane page the object to check collisions with
+     * @return boolean
+     */
+    public boolean checkCollision(IPane pane) {
+        Dimension paneDimension = pane.getDimension();
+        int invaderWidth = (int) dimension.getWidth();
+        int invaderHeight = (int) dimension.getHeight();
+        int paneWidth = (int) paneDimension.getWidth();
+        int paneHeight = (int) paneDimension.getHeight();
+
+        return getX() < pane.getX() + paneWidth
+            && getX() + invaderWidth > pane.getX()
+            &&  getY() < pane.getY() + paneHeight
+            && getY() + invaderHeight > pane.getY();
+    }
 }

@@ -30,13 +30,6 @@ public class Invader extends MovablePanel {
     private static final String ICON = "invader.jpg";
 
     /**
-     * Holding the Image instance of the invader.
-     * It should be repainted on every paint (with paintComponent())
-     * so it is always visible even if the invader moves.
-     */
-    private Image image;
-
-    /**
      * Constructor to initialize the invader.
      *
      * Set the Image instance from the ICON.
@@ -45,27 +38,12 @@ public class Invader extends MovablePanel {
      * Make visible.
      */
     public Invader() {
-        // Set an image
-        ImageIcon icon = new ImageIcon(this.getClass().getResource(ICON));
-        image = icon.getImage();
-
-        // Invader defaults
-        dimension = new Dimension(Shared.INVADER_WIDTH, Shared.INVADER_HEIGHT);
-        setPreferredSize(dimension);
-
+        setImageFromPath(ICON)
+        setDimension(Shared.INVADER_WIDTH, Shared.INVADER_HEIGHT);
         x = getRandomColumn();
         y = 0;
         setVisible(true);
         setSpeed(Shared.INVADER_SPEED);
-    }
-
-    /**
-     * Get the image instance.
-     *
-     * @return Image
-     */
-    public Image getImage() {
-        return image;
     }
 
     /**
@@ -103,42 +81,6 @@ public class Invader extends MovablePanel {
         }
     }
 
-
-    /**
-     * Check if the invader collisions with something
-     *
-     * @param  IPane page the object to check collisions with
-     * @return boolean
-     */
-    public boolean checkCollision(IPane pane) {
-        Dimension paneDimension = pane.getDimension();
-        int invaderWidth = (int) dimension.getWidth();
-        int invaderHeight = (int) dimension.getHeight();
-        int paneWidth = (int) paneDimension.getWidth();
-        int paneHeight = (int) paneDimension.getHeight();
-
-        return getX() < pane.getX() + paneWidth
-            && getX() + invaderWidth > pane.getX()
-            &&  getY() < pane.getY() + paneHeight
-            && getY() + invaderHeight > pane.getY();
-    }
-
-    /**
-     * Perform additional paint operations on every JPanel repaint()
-     * This is automatically called from the super class
-     * when a repain should happen.
-     *
-     * It repaints the image so it is always visible.
-     *
-     * @param Graphics graphics
-     */
-    protected void paintComponent(Graphics graphics) {
-        super.paintComponent(graphics);
-
-        // see javadoc for more info on the parameters
-        graphics.drawImage(image, 0, 0, null);
-    }
-
     /**
      * Get a random column in the space based on:
      *  - the space width
@@ -149,6 +91,8 @@ public class Invader extends MovablePanel {
      */
     private int getRandomColumn() {
         Random rand = new Random();
-        return rand.nextInt(Shared.SPACE_WIDTH - (int) dimension.getWidth());
+
+        // Adding one because random.nextInt(100) is in [1..99] range in Java
+        return rand.nextInt(Shared.SPACE_WIDTH + 1 - (int) dimension.getWidth());
     }
 }
