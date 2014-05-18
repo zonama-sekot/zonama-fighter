@@ -1,6 +1,7 @@
 package game;
 
 import javax.swing.JPanel;
+import java.awt.Dimension;
 
 /**
  * I am a MovablePanel:
@@ -12,7 +13,7 @@ import javax.swing.JPanel;
  * If you need my move behavior
  * you could ovveride my protected `performMove()` method.
  */
-public abstract class MovablePanel extends JPanel implements IMovable {
+public abstract class MovablePanel extends JPanel implements IMovable, IPane {
 
     protected int directionX;
     
@@ -23,6 +24,8 @@ public abstract class MovablePanel extends JPanel implements IMovable {
     protected int y;
     
     protected int speed;
+
+    protected Dimension dimension;
 
     /**
      * {@inheritDoc}
@@ -119,6 +122,24 @@ public abstract class MovablePanel extends JPanel implements IMovable {
      */
     public void setSpeed(int speed) {
         this.speed = speed;
+    }
+
+    /**
+     * Get the dimension
+     *
+     * @return Dimension
+     */
+    public Dimension getDimension() {
+        return dimension;
+    }
+
+    /**
+     * Set the dimension
+     *
+     * @param Dimension
+     */
+    public void setDimension(Dimension dimension) {
+        this.dimension = dimension;
     }
 
 }
