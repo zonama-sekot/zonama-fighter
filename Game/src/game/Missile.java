@@ -40,11 +40,6 @@ public class Missile extends MovablePanel {
     private boolean visible;
 
     /**
-     * Dimensions of the missile - its width and height.
-     */
-    private Dimension dim;
-
-    /**
      * Constructor to initialize the missile.
      *
      * Set the Image instance from the ICON.
@@ -58,11 +53,11 @@ public class Missile extends MovablePanel {
         image = icon.getImage();
 
         // Invader defaults
-        dim = new Dimension(Shared.MISSILE_WIDTH, Shared.MISSILE_HEIGHT);
-        setPreferredSize(dim);
+        dimension = new Dimension(Shared.MISSILE_WIDTH, Shared.MISSILE_HEIGHT);
+        setPreferredSize(dimension);
 
-        x = x - Shared.MISSILE_WIDTH / 2;
-        y = y - Shared.MISSILE_HEIGHT / 2;
+        this.x = x - Shared.MISSILE_WIDTH / 2;
+        this.y = y - Shared.MISSILE_HEIGHT / 2;
         visible = true;
         setSpeed(Shared.MISSILE_SPEED);
     }
