@@ -140,13 +140,23 @@ public class SpacePanel extends JPanel implements ActionListener, IDimensional {
      */
     public void moveInvadersDown() {
         for (Invader invader : invaders) {
-            invader.moveDown();
+        	if (invader.checkCollision(ship)) {
+                invader.visible = false;
+            }else{
+            	invader.moveDown();
+            }
         }
     }
 
     public void moveMissilesUp() {
         for (Missile missile: missiles) {
             missile.moveUp();
+        	for (Invader invader : invaders) {
+            	if (invader.checkCollision(missile)) {
+                    invader.visible = false;
+                    missile.visible = false;
+            	}
+            }
         }
     }
 
