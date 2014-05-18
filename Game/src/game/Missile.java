@@ -1,14 +1,14 @@
 package game;
 
 import java.awt.*;
-
 import javax.swing.*;
-
 import java.util.Random;
+import java.util.ArrayList;
 
-import game.space.Space;
 import game.Shared;
 import game.MovablePanel;
+import game.space.SpacePanel;
+import game.invader.Invader;
 
 /**
  * I am a missile.
@@ -35,11 +35,6 @@ public class Missile extends MovablePanel {
     private Image image;
 
     /**
-     * Indicate if the missile is visible.
-     */
-    public boolean visible;
-
-    /**
      * Constructor to initialize the missile.
      *
      * Set the Image instance from the ICON.
@@ -58,7 +53,7 @@ public class Missile extends MovablePanel {
 
         this.x = x - Shared.MISSILE_WIDTH / 2;
         this.y = y - Shared.MISSILE_HEIGHT / 2;
-        visible = true;
+        setVisible(true);
         setSpeed(Shared.MISSILE_SPEED);
     }
 
@@ -72,15 +67,6 @@ public class Missile extends MovablePanel {
     }
 
     /**
-     * Check if invader is visible
-     *
-     * @return boolean
-     */
-    public boolean isVisible() {
-        return visible;
-    }
-
-    /**
      * Overriden method from MovablePanel.
      * The invader should move only it is visible - no need to move it after
      * it left the space.
@@ -89,7 +75,7 @@ public class Missile extends MovablePanel {
      */
     @Override
     protected void performMove() {
-        if (!visible) {
+        if (!isVisible()) {
             return;
         }
 
@@ -102,7 +88,19 @@ public class Missile extends MovablePanel {
         // The invader should not go up and it's actually coming from the top
         // side and it should be visible initially
         if (y < Shared.MISSILE_HEIGHT) {
-            visible = false;
+            setVisible(false);
+        } else {
+
+            SpacePanel parent = (SpacePanel) getParent();
+            ArrayList<Invader> invaders = parent.getInvaders();
+
+            for (Invader invader : invaders) {
+                if (invader.isVisible()
+                    && invader.checkCollision(this)) {
+                    invader.setVisible(false);
+                    setVisible(false);
+                }
+            }
         }
     }
 

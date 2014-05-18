@@ -125,6 +125,24 @@ public class SpacePanel extends JPanel implements ActionListener, IDimensional {
     }
 
     /**
+     * Get the invaders
+     *
+     * @return ArrayList<Invader>
+     */
+    public ArrayList<Invader> getInvaders() {
+        return invaders;
+    }
+
+    /**
+     * Get the missiles
+     *
+     * @return ArrayList<Missile>
+     */
+    public ArrayList<Missile> getMissile() {
+        return missiles;
+    }
+
+    /**
      * Get the timer
      *
      * @return Timer
@@ -140,23 +158,13 @@ public class SpacePanel extends JPanel implements ActionListener, IDimensional {
      */
     public void moveInvadersDown() {
         for (Invader invader : invaders) {
-        	if (invader.checkCollision(ship)) {
-                invader.visible = false;
-            }else{
-            	invader.moveDown();
-            }
+            invader.moveDown();
         }
     }
 
     public void moveMissilesUp() {
         for (Missile missile: missiles) {
             missile.moveUp();
-        	for (Invader invader : invaders) {
-            	if (invader.checkCollision(missile)) {
-                    invader.visible = false;
-                    missile.visible = false;
-            	}
-            }
         }
     }
 

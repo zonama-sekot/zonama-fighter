@@ -37,11 +37,6 @@ public class Invader extends MovablePanel {
     private Image image;
 
     /**
-     * Indicate if the invader is visible.
-     */
-    public boolean visible;
-
-    /**
      * Constructor to initialize the invader.
      *
      * Set the Image instance from the ICON.
@@ -60,7 +55,7 @@ public class Invader extends MovablePanel {
 
         x = getRandomColumn();
         y = 0;
-        visible = true;
+        setVisible(true);
         setSpeed(Shared.INVADER_SPEED);
     }
 
@@ -74,15 +69,6 @@ public class Invader extends MovablePanel {
     }
 
     /**
-     * Check if invader is visible
-     *
-     * @return boolean
-     */
-    public boolean isVisible() {
-        return visible;
-    }
-
-    /**
      * Overriden method from MovablePanel.
      * The invader should move only it is visible - no need to move it after
      * it left the space.
@@ -91,7 +77,7 @@ public class Invader extends MovablePanel {
      */
     @Override
     protected void performMove() {
-        if (!visible) {
+        if (!isVisible()) {
             return;
         }
 
@@ -104,16 +90,16 @@ public class Invader extends MovablePanel {
         // The invader should not go up and it's actually coming from the top
         // side and it should be visible initially
         if (y > Shared.SPACE_HEIGHT || (x > Shared.SPACE_WIDTH || (x - dimension.getWidth()) < 0)) {
-            visible = false;
+            setVisible(false);
         }
 
-        if (visible) {
+        if (isVisible()) {
             SpacePanel parent = (SpacePanel) getParent();
             ShipWithImage ship = parent.getShip();
 
-//            if (checkCollision(ship)) {
-//                parent.getTimer().stop();
-//            }
+           if (checkCollision(ship)) {
+               parent.getTimer().stop();
+           }
         }
     }
 
