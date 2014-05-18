@@ -39,7 +39,7 @@ public class Invader extends MovablePanel {
     /**
      * Indicate if the invader is visible.
      */
-    private boolean visible;
+    public boolean visible;
 
     /**
      * Constructor to initialize the invader.
@@ -111,9 +111,9 @@ public class Invader extends MovablePanel {
             SpacePanel parent = (SpacePanel) getParent();
             ShipWithImage ship = parent.getShip();
 
-            if (checkCollision(ship)) {
-                parent.getTimer().stop();
-            }
+//            if (checkCollision(ship)) {
+//                parent.getTimer().stop();
+//            }
         }
     }
 
@@ -124,7 +124,7 @@ public class Invader extends MovablePanel {
      * @param  IPane page the object to check collisions with
      * @return boolean
      */
-    protected boolean checkCollision(IPane pane) {
+    public boolean checkCollision(IPane pane) {
         Dimension paneDimension = pane.getDimension();
         int invaderWidth = (int) dimension.getWidth();
         int invaderHeight = (int) dimension.getHeight();

@@ -37,7 +37,7 @@ public class Missile extends MovablePanel {
     /**
      * Indicate if the missile is visible.
      */
-    private boolean visible;
+    public boolean visible;
 
     /**
      * Constructor to initialize the missile.
