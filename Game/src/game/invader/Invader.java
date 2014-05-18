@@ -38,7 +38,7 @@ public class Invader extends MovablePanel {
      * Make visible.
      */
     public Invader() {
-        setImageFromPath(ICON)
+        setImageFromPath(ICON);
         setDimension(Shared.INVADER_WIDTH, Shared.INVADER_HEIGHT);
         x = getRandomColumn();
         y = 0;

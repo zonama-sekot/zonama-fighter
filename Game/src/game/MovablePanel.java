@@ -2,6 +2,9 @@ package game;
 
 import javax.swing.JPanel;
 import java.awt.Dimension;
+import java.awt.Image;
+import javax.swing.ImageIcon;
+import java.awt.Graphics;
 
 /**
  * I am a MovablePanel:

@@ -22,15 +22,6 @@ public class Space extends JFrame implements KeyListener {
     protected SpacePanel panel;
 
     /**
-     * Get the space panel
-     *
-     * @return SpacePanel
-     */
-    public SpacePanel getPanel() {
-        return this.panel;
-    }
-
-    /**
      * Initializing of the Space:
      *  - set title of the window
      *  - set background
@@ -55,6 +46,15 @@ public class Space extends JFrame implements KeyListener {
 
         pack();
         setVisible(true);
+    }
+
+    /**
+     * Get the space panel
+     *
+     * @return SpacePanel
+     */
+    public SpacePanel getPanel() {
+        return this.panel;
     }
 
     /*
