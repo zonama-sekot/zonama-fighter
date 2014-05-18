@@ -97,9 +97,9 @@ public class Invader extends MovablePanel {
             SpacePanel parent = (SpacePanel) getParent();
             ShipWithImage ship = parent.getShip();
 
-//            if (checkCollision(ship)) {
-//                parent.getTimer().stop();
-//            }
+           if (checkCollision(ship)) {
+               parent.getTimer().stop();
+           }
         }
     }
 

@@ -1,14 +1,14 @@
 package game;
 
 import java.awt.*;
-
 import javax.swing.*;
-
 import java.util.Random;
+import java.util.ArrayList;
 
-import game.space.Space;
 import game.Shared;
 import game.MovablePanel;
+import game.space.SpacePanel;
+import game.invader.Invader;
 
 /**
  * I am a missile.
@@ -89,6 +89,18 @@ public class Missile extends MovablePanel {
         // side and it should be visible initially
         if (y < Shared.MISSILE_HEIGHT) {
             setVisible(false);
+        } else {
+
+            SpacePanel parent = (SpacePanel) getParent();
+            ArrayList<Invader> invaders = parent.getInvaders();
+
+            for (Invader invader : invaders) {
+                if (invader.isVisible()
+                    && invader.checkCollision(this)) {
+                    invader.setVisible(false);
+                    setVisible(false);
+                }
+            }
         }
     }
 
