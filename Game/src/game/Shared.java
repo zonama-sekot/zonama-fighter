@@ -14,6 +14,10 @@ public interface Shared {
     public static final int INVADER_WIDTH = 20;
     public static final int INVADER_HEIGHT = 20;
     public static final int INVADER_SPEED = 1;
+    
+    public static final int MISSILE_WIDTH = 11;
+    public static final int MISSILE_HEIGHT = 17;
+    public static final int MISSILE_SPEED = 3;
 
     public static final int TIMER_DELAY = 10;
 
