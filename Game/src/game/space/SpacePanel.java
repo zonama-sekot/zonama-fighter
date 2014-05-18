@@ -184,7 +184,7 @@ public class SpacePanel extends JPanel implements ActionListener {
             break;
 
             case KeyEvent.VK_SPACE:
-                addMissile(new Missile(ship.getX(), ship.getY()));
+                addMissile(new Missile(ship.getX() + Shared.FIGHTER_WIDTH / 2, ship.getY()));
             break;
         }
     }

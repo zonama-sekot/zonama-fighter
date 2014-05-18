@@ -11,51 +11,48 @@ import game.Shared;
 import game.MovablePanel;
 
 /**
- * I am an invader.
+ * I am a missile.
  * I am a MovablePanel:
  *   * I move
  *   * I have a position (x,y)
  *   * I have a direction (x,y)
  *   * I have a speed (pixels in direction per move)
  *
- * I fly from the top of the space to the bottom.
- * I can create myself at a random column of the space.
- * I have the looks of an invader as well (with an Image).
+ * I have the looks of a missile as well (with an Image).
  */
-
 public class Missile extends MovablePanel {
 
     /**
-     * Constant holding the relative path to the invader image
+     * Constant holding the relative path to the missile image
      */
-    private static final String ICON = "missile.jpg";
+    private static final String ICON = "missile.png";
 
     /**
-     * Holding the Image instance of the invader.
+     * Holding the Image instance of the missile.
      * It should be repainted on every paint (with paintComponent())
-     * so it is always visible even if the invader moves.
+     * so it is always visible even if the missile moves.
      */
     private Image image;
 
     /**
-     * Indicate if the invader is visible.
+     * Indicate if the missile is visible.
      */
     private boolean visible;
 
     /**
-     * Dimensions of the invader - its width and height.
+     * Dimensions of the missile - its width and height.
      */
     private Dimension dim;
 
     /**
-     * Constructor to initialize the invader.
+     * Constructor to initialize the missile.
      *
      * Set the Image instance from the ICON.
      * Set the preferred size with Dimension based on the Shared constants.
      * Position at the top of the space at random column.
      * Make visible.
      */
-    public Missile(int X, int Y) {
+    public Missile(int x, int y) {
         // Set an image
         ImageIcon icon = new ImageIcon(this.getClass().getResource(ICON));
         image = icon.getImage();
@@ -64,8 +61,8 @@ public class Missile extends MovablePanel {
         dim = new Dimension(Shared.MISSILE_WIDTH, Shared.MISSILE_HEIGHT);
         setPreferredSize(dim);
 
-        x = X;
-        y = Y;
+        x = x - Shared.MISSILE_WIDTH / 2;
+        y = y - Shared.MISSILE_HEIGHT / 2;
         visible = true;
         setSpeed(Shared.MISSILE_SPEED);
     }
