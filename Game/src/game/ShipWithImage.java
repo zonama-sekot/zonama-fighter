@@ -20,13 +20,6 @@ public class ShipWithImage extends MovablePanel {
     private static final String ICON = "spaceship.png";
 
     /**
-     * Holding the Image instance of the ship.
-     * It should be repainted on every paint (with paintComponent())
-     * so it is always visible even when the ship moves.
-     */
-    private Image image;
-
-    /**
      * Initialize the ship:
      *  - create and set the image from the path
      *  - set the size with a dimension
@@ -34,30 +27,13 @@ public class ShipWithImage extends MovablePanel {
      *  - set the initial speed
      */
     public ShipWithImage() {
-        ImageIcon icon = new ImageIcon(this.getClass().getResource(ICON));
-        image = icon.getImage();
-
-        dimension = new Dimension(Shared.FIGHTER_WIDTH, Shared.FIGHTER_HEIGHT);
-        setPreferredSize(dimension);
+        setDimension(Shared.FIGHTER_WIDTH, Shared.FIGHTER_HEIGHT);
+        setImageFromPath(ICON);
 
         // Default Position of the fighter - center bottom
         x = (Shared.SPACE_WIDTH - Shared.FIGHTER_WIDTH) / 2;
         y = Shared.SPACE_HEIGHT - Shared.FIGHTER_HEIGHT;
         speed = Shared.FIGHTER_SPEED;
-    }
-
-    /**
-     * Perform additional paint operations on every JPanel repaint()
-     * This is automatically called from the super class
-     * when a repain should happen.
-     *
-     * It repaints the image so it is always visible.
-     *
-     * @param Graphics graphics
-     */
-    public void paintComponent(Graphics graphics) {
-    	super.paintComponent(graphics);
-    	graphics.drawImage(image, 0, 0, null);
     }
 
     /**

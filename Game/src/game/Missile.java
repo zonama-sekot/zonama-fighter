@@ -28,13 +28,6 @@ public class Missile extends MovablePanel {
     private static final String ICON = "missile.png";
 
     /**
-     * Holding the Image instance of the missile.
-     * It should be repainted on every paint (with paintComponent())
-     * so it is always visible even if the missile moves.
-     */
-    private Image image;
-
-    /**
      * Constructor to initialize the missile.
      *
      * Set the Image instance from the ICON.
@@ -43,35 +36,27 @@ public class Missile extends MovablePanel {
      * Make visible.
      */
     public Missile(int x, int y) {
-        // Set an image
-        ImageIcon icon = new ImageIcon(this.getClass().getResource(ICON));
-        image = icon.getImage();
+        setDimension(Shared.MISSILE_WIDTH, Shared.MISSILE_HEIGHT);
+        setImageFromPath(ICON);
 
-        // Invader defaults
-        dimension = new Dimension(Shared.MISSILE_WIDTH, Shared.MISSILE_HEIGHT);
-        setPreferredSize(dimension);
-
+        // Default position of the missile should
+        // take into consideration its own width and height
         this.x = x - Shared.MISSILE_WIDTH / 2;
         this.y = y - Shared.MISSILE_HEIGHT / 2;
+
         setVisible(true);
         setSpeed(Shared.MISSILE_SPEED);
     }
 
     /**
-     * Get the image instance.
-     *
-     * @return Image
-     */
-    public Image getImage() {
-        return image;
-    }
-
-    /**
      * Overriden method from MovablePanel.
-     * The invader should move only it is visible - no need to move it after
-     * it left the space.
+     * The missile should move only it is visible - no need to move it after
+     * it left the space or hit an invader
      *
-     * This will hide the invader if it left the space after super.performMove()
+     * This will hide the missile if it left the space after super.performMove()
+     *
+     * It will also check if it hit an invader.
+     * If it did it will kill the invader (hide it) and it will hide itself
      */
     @Override
     protected void performMove() {
@@ -102,21 +87,5 @@ public class Missile extends MovablePanel {
                 }
             }
         }
-    }
-
-    /**
-     * Perform additional paint operations on every JPanel repaint()
-     * This is automatically called from the super class
-     * when a repain should happen.
-     *
-     * It repaints the image so it is always visible.
-     *
-     * @param Graphics graphics
-     */
-    protected void paintComponent(Graphics graphics) {
-        super.paintComponent(graphics);
-
-        // see javadoc for more info on the parameters
-        graphics.drawImage(image, 0, 0, null);
     }
 }
