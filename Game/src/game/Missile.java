@@ -36,7 +36,7 @@ public class Missile extends MovablePanel {
      * Make visible.
      */
     public Missile(int x, int y) {
-        setDimension(Shared.MISSILE_WIDTH, Shared.MISSILE_HEIGHT);
+        setPreferredSize(new Dimension(Shared.MISSILE_WIDTH, Shared.MISSILE_HEIGHT));
         setImageFromPath(ICON);
 
         // Default position of the missile should

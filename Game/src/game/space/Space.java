@@ -7,10 +7,10 @@ import javax.swing.*;
 
 import java.util.ArrayList;
 
-import game.Missile;
-import game.Engine;
 import game.Shared;
-import game.IDimensional;
+import game.IPane;
+import game.Engine;
+import game.Missile;
 import game.Ship;
 import game.invader.Invader;
 
@@ -20,44 +20,18 @@ import game.invader.Invader;
  * I accept KeyEvent and pass movements to the ship.
  * I could move invaders down and missiles up.
  */
-public class Space extends JPanel implements IDimensional, KeyListener {
-
-    /**
-     * My dimensions
-     */
-    private Dimension dimension;
+public class Space extends JPanel implements KeyListener, IPane {
 
     /**
      * Initialize the Space:
      *  - setDoubleBuffered for better painting and no flickering
      *  - set background
      *  - set the size
-     *  - create and add the ship
-     *  - start the timer
      */
     public Space() {
         setDoubleBuffered(true);
         setBackground(Color.BLACK);
-        dimension = new Dimension(Shared.SPACE_WIDTH, Shared.SPACE_HEIGHT);
-        setPreferredSize(dimension);
-    }
-
-    /**
-     * Get the dimension
-     *
-     * @return Dimension
-     */
-    public Dimension getDimension() {
-        return dimension;
-    }
-
-    /**
-     * Set the dimension
-     *
-     * @param Dimension
-     */
-    public void setDimension(Dimension dimension) {
-        this.dimension = dimension;
+        setPreferredSize(new Dimension(Shared.SPACE_WIDTH, Shared.SPACE_HEIGHT));
     }
 
     /**
@@ -114,7 +88,7 @@ public class Space extends JPanel implements IDimensional, KeyListener {
 
             case KeyEvent.VK_SPACE:
                 Engine.getInstance().addMissile(new Missile(
-                    ship.getX() + (int) ship.getDimension().getWidth() / 2,
+                    ship.getX() + (int) ship.getPreferredSize().getWidth() / 2,
                     ship.getY()
                 ));
             break;

@@ -27,7 +27,7 @@ public class Ship extends MovablePanel {
      *  - set the initial speed
      */
     public Ship() {
-        setDimension(Shared.FIGHTER_WIDTH, Shared.FIGHTER_HEIGHT);
+        setPreferredSize(new Dimension(Shared.FIGHTER_WIDTH, Shared.FIGHTER_HEIGHT));
         setImageFromPath(ICON);
 
         // Default Position of the fighter - center bottom
@@ -49,7 +49,7 @@ public class Ship extends MovablePanel {
         }
 
         // If the fighter is on the right side of the screen
-        int maxX = Shared.SPACE_WIDTH - (int) dimension.getWidth();
+        int maxX = Shared.SPACE_WIDTH - (int) getPreferredSize().getWidth();
         if (x >= maxX && directionX > 0) {
             directionX = 0;
             x = maxX;
@@ -62,7 +62,7 @@ public class Ship extends MovablePanel {
         }
 
         // If the fighter is on the bottom side of the screen
-        int maxY = Shared.SPACE_HEIGHT - (int) dimension.getHeight();
+        int maxY = Shared.SPACE_HEIGHT - (int) getPreferredSize().getHeight();
         if (y >= maxY && directionY > 0) {
             directionY = 0;
             y = maxY;
