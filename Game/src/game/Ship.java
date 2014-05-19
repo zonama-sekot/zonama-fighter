@@ -15,7 +15,7 @@ public class Ship extends MovablePanel {
     /**
      * Hold a relative path to the spaceship image.
      */
-    private static final String ICON = "spaceship.png";
+    private static final String ICON = "spaceship-animated.gif";
 
     /**
      * Initialize the ship:
@@ -26,12 +26,15 @@ public class Ship extends MovablePanel {
      */
     public Ship() {
         setPreferredSize(new Dimension(Shared.FIGHTER_WIDTH, Shared.FIGHTER_HEIGHT));
-        setImageFromPath(ICON);
 
         // Default Position of the fighter - center bottom
         x = (Shared.SPACE_WIDTH - Shared.FIGHTER_WIDTH) / 2;
         y = Shared.SPACE_HEIGHT - Shared.FIGHTER_HEIGHT;
         speed = Shared.FIGHTER_SPEED;
+    }
+
+    protected String getImagePath() {
+        return ICON;
     }
 
     /**

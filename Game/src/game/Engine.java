@@ -141,9 +141,15 @@ public class Engine implements ActionListener {
         player = new Player();
         ship = new Ship();
         space = new Space();
-        space.add(ship);
         JFrame frame = createFrame();
         frame.getContentPane().add(space);
+
+        // It is important the ship image is created after
+        // it is added to the space.
+        // Otherwise the transparent images are not visible
+        space.add(ship);
+        ship.setBufferedImageFromPath(ship.getImagePath());
+
         frame.addKeyListener(space);
         frame.pack();
         frame.setVisible(true);

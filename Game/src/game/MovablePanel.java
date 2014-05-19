@@ -1,9 +1,16 @@
 package game;
 
-import javax.swing.JPanel;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Image;
-import javax.swing.ImageIcon;
+import java.awt.AlphaComposite;
+import java.awt.GraphicsConfiguration;
+import java.awt.image.BufferedImage;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+
+import javax.swing.JPanel;
+import javax.swing.ImageIcon;
 
 /**
  * I am a MovablePanel:
@@ -144,10 +151,29 @@ public abstract class MovablePanel extends JPanel implements IMovable, IPane {
         this.image = image;
     }
 
-    protected void setImageFromPath(String path) {
+    public void setImageFromPath(String path) {
         ImageIcon icon = new ImageIcon(this.getClass().getResource(path));
         setImage(icon.getImage());
     }
+
+    /**
+     * Set BufferedImage with transparency on
+     *
+     * @param String path - local path to the image file
+     */
+    public void setBufferedImageFromPath(String path) {
+        ImageIcon icon = new ImageIcon(this.getClass().getResource(path));
+        BufferedImage bufferedImage = new BufferedImage(
+            icon.getIconWidth(),
+            icon.getIconHeight(),
+            BufferedImage.TYPE_INT_ARGB
+        );
+        Graphics graphics = bufferedImage.createGraphics();
+        graphics.setColor(new Color(0, 0, 0, 0));
+        setImage(icon.getImage());
+    }
+
+    protected abstract String getImagePath();
 
     /**
      * Perform additional paint operations on every JPanel repaint()
@@ -160,6 +186,11 @@ public abstract class MovablePanel extends JPanel implements IMovable, IPane {
      */
     protected void paintComponent(Graphics graphics) {
         super.paintComponent(graphics);
+
+        // Set alpha transparency
+        Graphics2D graphics2D = (Graphics2D) graphics;
+        graphics2D.setComposite(AlphaComposite.Clear);
+        graphics2D.setComposite(AlphaComposite.Src);
 
         // see javadoc for more info on the parameters
         graphics.drawImage(getImage(), 0, 0, null);
