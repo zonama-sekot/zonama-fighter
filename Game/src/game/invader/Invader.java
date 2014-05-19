@@ -1,7 +1,6 @@
 package game.invader;
 
-import java.awt.*;
-import javax.swing.*;
+import java.awt.Dimension;
 import java.util.Random;
 
 import game.Shared;

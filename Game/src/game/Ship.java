@@ -1,9 +1,7 @@
 package game;
 
 import java.awt.Graphics;
-import javax.swing.JPanel;
-import java.awt.*;
-import javax.swing.*;
+import java.awt.Dimension;
 
 /**
  * I am a ship.

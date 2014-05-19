@@ -1,11 +1,13 @@
 package game.space;
 
-import java.awt.*;
-import java.awt.event.*;
-
-import javax.swing.*;
-
 import java.util.ArrayList;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.event.KeyListener;
+import java.awt.event.KeyEvent;
+
+import javax.swing.JPanel;
 
 import game.Shared;
 import game.IPane;

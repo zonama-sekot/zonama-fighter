@@ -1,8 +1,6 @@
 package game;
 
-import java.awt.*;
-import javax.swing.*;
-import java.util.Random;
+import java.awt.Dimension;
 import java.util.ArrayList;
 
 import game.Shared;
