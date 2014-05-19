@@ -79,8 +79,8 @@ public class Invader extends MovablePanel {
             Ship ship = Engine.getInstance().getShip();
 
            if (checkCollision(ship)) {
-                setVisible(false);
                Engine.getInstance().getPlayer().decreaseLives();
+               setVisible(false);
            }
         }
     }
