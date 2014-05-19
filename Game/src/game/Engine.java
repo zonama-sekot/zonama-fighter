@@ -46,6 +46,7 @@ public class Engine {
         space.add(ship);
         JFrame frame = createFrame();
         frame.getContentPane().add(space);
+        frame.addKeyListener(space);
         frame.pack();
         frame.setVisible(true);
     }

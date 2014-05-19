@@ -66,8 +66,6 @@ public class Space extends JPanel implements ActionListener, IDimensional, KeyLi
         dimension = new Dimension(Shared.SPACE_WIDTH, Shared.SPACE_HEIGHT);
         setPreferredSize(dimension);
 
-        addKeyListener(this);
-
         timer = new Timer(Shared.TIMER_DELAY, this);
         timer.start();
     }
@@ -206,7 +204,6 @@ public class Space extends JPanel implements ActionListener, IDimensional, KeyLi
     public void keyPressed(KeyEvent event) {
         // Notify the panel of the event
         int keyCode = event.getKeyCode();
-        System.out.println(keyCode);
         Ship ship = Engine.getInstance().getShip();
 
         switch (keyCode) {
