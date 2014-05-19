@@ -6,7 +6,6 @@ import java.awt.event.*;
 import javax.swing.*;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 import game.Missile;
 import game.Engine;
@@ -16,35 +15,12 @@ import game.Ship;
 import game.invader.Invader;
 
 /**
- * I am a space panel - the single JPanel living inside the Space.
+ * I am the Space - the single JPanel living inside a frame.
  *
- * I tick with a Timer and the ActionListener interface.
- * I hold invaders with ArrayList<Invader>
- * I hold a ship.
  * I accept KeyEvent and pass movements to the ship.
- * When I tick:
- *  - I move invaders down the space.
- *  - I create new invaders (not every tick)
+ * I could move invaders down and missiles up.
  */
-public class Space extends JPanel implements ActionListener, IDimensional, KeyListener {
-
-    /**
-     * The Timer instance which I use to tick.
-     */
-    protected Timer timer;
-
-    /**
-     * All the invaders on the Space.
-     */
-    protected ArrayList<Invader> invaders = new ArrayList<Invader>();
-    protected ArrayList<Missile> missiles = new ArrayList<Missile>();
-
-    /**
-     * Total count of the ticks
-     * I use it to create an invader
-     * every other `Shared.NEW_INVADER_THRESHOLD` time.
-     */
-    private int totalMomentsCount = 0;
+public class Space extends JPanel implements IDimensional, KeyListener {
 
     /**
      * My dimensions
@@ -62,32 +38,8 @@ public class Space extends JPanel implements ActionListener, IDimensional, KeyLi
     public Space() {
         setDoubleBuffered(true);
         setBackground(Color.BLACK);
-
         dimension = new Dimension(Shared.SPACE_WIDTH, Shared.SPACE_HEIGHT);
         setPreferredSize(dimension);
-
-        timer = new Timer(Shared.TIMER_DELAY, this);
-        timer.start();
-    }
-
-    /**
-     * Add an invader to the Space
-     * This will add it to both the panel and the invaders ArrayList
-     *
-     * @param Invader newInvader
-     */
-    public void addInvader(Invader newInvader) {
-        invaders.add(newInvader);
-        add(newInvader);
-        revalidate();
-        repaint();
-    }
-
-    public void addMissile(Missile newMissile) {
-        missiles.add(newMissile);
-        add(newMissile);
-        revalidate();
-        repaint();
     }
 
     /**
@@ -109,83 +61,20 @@ public class Space extends JPanel implements ActionListener, IDimensional, KeyLi
     }
 
     /**
-     * Get the invaders
-     *
-     * @return ArrayList<Invader>
-     */
-    public ArrayList<Invader> getInvaders() {
-        return invaders;
-    }
-
-    /**
-     * Get the missiles
-     *
-     * @return ArrayList<Missile>
-     */
-    public ArrayList<Missile> getMissile() {
-        return missiles;
-    }
-
-    /**
-     * Get the timer
-     *
-     * @return Timer
-     */
-    public Timer getTimer() {
-        return timer;
-    }
-
-    /**
      * Move all invaders down.
      * The invader objects should
      * take care of their own hiding if they leave the space.
      */
-    public void moveInvadersDown() {
+    public void moveInvadersDown(ArrayList<Invader> invaders) {
         for (Invader invader : invaders) {
             invader.moveDown();
         }
     }
 
-    public void moveMissilesUp() {
+    public void moveMissilesUp(ArrayList<Missile> missiles) {
         for (Missile missile: missiles) {
             missile.moveUp();
         }
-    }
-
-    /**
-     * Called by the Timer because of the ActionListener interface
-     *
-     * Every tick I move the invaders down and create a new invader.
-     *
-     * @param ActionEvent event
-     */
-    public void actionPerformed(ActionEvent event) {
-        totalMomentsCount++;
-        moveInvadersDown();
-        moveMissilesUp();
-        if (shouldCreateInvader()) {
-            addInvader(new Invader());
-        }
-        repaint();
-    }
-
-    /**
-     * Check if new invader should be created and added to the space,
-     * based on the number of ticks since the last one and a bit of randomness.
-     *
-     * @return boolean
-     */
-    protected boolean shouldCreateInvader() {
-        // Check if the number of ticks (threshold) have passed
-        if (totalMomentsCount % Shared.NEW_INVADER_THRESHOLD != 0) {
-            return false;
-        }
-
-        // Add a bit of randomness so the invaders movement is not so droningly
-        Random rand = new Random();
-        int chance = rand.nextInt(100);
-
-        return chance < Shared.NEW_INVADER_CHANCE;
     }
 
     /*
@@ -224,7 +113,10 @@ public class Space extends JPanel implements ActionListener, IDimensional, KeyLi
             break;
 
             case KeyEvent.VK_SPACE:
-                addMissile(new Missile(ship.getX() + (int) ship.getDimension().getWidth() / 2, ship.getY()));
+                Engine.getInstance().addMissile(new Missile(
+                    ship.getX() + (int) ship.getDimension().getWidth() / 2,
+                    ship.getY()
+                ));
             break;
         }
     }

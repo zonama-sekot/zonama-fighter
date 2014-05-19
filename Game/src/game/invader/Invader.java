@@ -73,11 +73,10 @@ public class Invader extends MovablePanel {
         }
 
         if (isVisible()) {
-            Space space = Engine.getInstance().getSpace();
             Ship ship = Engine.getInstance().getShip();
 
            if (checkCollision(ship)) {
-               space.getTimer().stop();
+               Engine.getInstance().getTimer().stop();
            }
         }
     }

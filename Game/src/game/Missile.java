@@ -76,8 +76,7 @@ public class Missile extends MovablePanel {
             setVisible(false);
         } else {
 
-            Space space = Engine.getInstance().getSpace();
-            ArrayList<Invader> invaders = space.getInvaders();
+            ArrayList<Invader> invaders = Engine.getInstance().getInvaders();
 
             for (Invader invader : invaders) {
                 if (invader.isVisible()
