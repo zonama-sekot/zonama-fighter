@@ -11,7 +11,7 @@ import java.util.Random;
 import game.Missile;
 import game.Shared;
 import game.IDimensional;
-import game.ShipWithImage;
+import game.Ship;
 import game.invader.Invader;
 
 /**
@@ -53,7 +53,7 @@ public class SpacePanel extends JPanel implements ActionListener, IDimensional {
     /**
      * The ship which I move
      */
-    private ShipWithImage ship;
+    private Ship ship;
 
     /**
      * Initialize the SpacePanel:
@@ -70,7 +70,7 @@ public class SpacePanel extends JPanel implements ActionListener, IDimensional {
         dimension = new Dimension(Shared.SPACE_WIDTH, Shared.SPACE_HEIGHT);
         setPreferredSize(dimension);
 
-        ship = new ShipWithImage();
+        ship = new Ship();
         add(ship);
 
         timer = new Timer(Shared.TIMER_DELAY, this);
@@ -118,9 +118,9 @@ public class SpacePanel extends JPanel implements ActionListener, IDimensional {
     /**
      * Get the ship
      *
-     * @return ShipWithImage
+     * @return Ship
      */
-    public ShipWithImage getShip() {
+    public Ship getShip() {
         return ship;
     }
 

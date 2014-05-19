@@ -8,7 +8,7 @@ import game.Shared;
 import game.IPane;
 import game.MovablePanel;
 import game.space.SpacePanel;
-import game.ShipWithImage;
+import game.Ship;
 
 /**
  * I am an invader.
@@ -73,7 +73,7 @@ public class Invader extends MovablePanel {
 
         if (isVisible()) {
             SpacePanel parent = (SpacePanel) getParent();
-            ShipWithImage ship = parent.getShip();
+            Ship ship = parent.getShip();
 
            if (checkCollision(ship)) {
                parent.getTimer().stop();

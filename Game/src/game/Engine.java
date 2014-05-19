@@ -10,7 +10,7 @@ public class Engine {
 
     protected static Engine instance;
 
-    protected Space gameSpace;
+    protected Space space;
 
     protected Player player;
 

@@ -12,7 +12,7 @@ import javax.swing.*;
  * I have the looks of a spacecraft with an Image.
  * I should shoot and kill invaders, *but not yet*.
  */
-public class ShipWithImage extends MovablePanel {
+public class Ship extends MovablePanel {
 
     /**
      * Hold a relative path to the spaceship image.
@@ -26,7 +26,7 @@ public class ShipWithImage extends MovablePanel {
      *  - position at the bottom center of the space
      *  - set the initial speed
      */
-    public ShipWithImage() {
+    public Ship() {
         setDimension(Shared.FIGHTER_WIDTH, Shared.FIGHTER_HEIGHT);
         setImageFromPath(ICON);
 
