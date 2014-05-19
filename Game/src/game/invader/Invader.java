@@ -6,8 +6,9 @@ import java.util.Random;
 
 import game.Shared;
 import game.IPane;
+import game.Engine;
 import game.MovablePanel;
-import game.space.SpacePanel;
+import game.space.Space;
 import game.Ship;
 
 /**
@@ -72,11 +73,11 @@ public class Invader extends MovablePanel {
         }
 
         if (isVisible()) {
-            SpacePanel parent = (SpacePanel) getParent();
-            Ship ship = parent.getShip();
+            Space space = Engine.getInstance().getSpace();
+            Ship ship = Engine.getInstance().getShip();
 
            if (checkCollision(ship)) {
-               parent.getTimer().stop();
+               space.getTimer().stop();
            }
         }
     }

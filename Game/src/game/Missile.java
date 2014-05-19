@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import game.Shared;
 import game.MovablePanel;
-import game.space.SpacePanel;
+import game.space.Space;
 import game.invader.Invader;
 
 /**
@@ -76,8 +76,8 @@ public class Missile extends MovablePanel {
             setVisible(false);
         } else {
 
-            SpacePanel parent = (SpacePanel) getParent();
-            ArrayList<Invader> invaders = parent.getInvaders();
+            Space space = Engine.getInstance().getSpace();
+            ArrayList<Invader> invaders = space.getInvaders();
 
             for (Invader invader : invaders) {
                 if (invader.isVisible()
