@@ -42,8 +42,11 @@ public class Missile extends MovablePanel {
         this.x = x - Shared.MISSILE_WIDTH / 2;
         this.y = y - Shared.MISSILE_HEIGHT / 2;
 
-        setVisible(true);
         setSpeed(Shared.MISSILE_SPEED);
+
+        // Set the bounds because of the null layout of the parent
+        setBounds(x, y, Shared.MISSILE_WIDTH, Shared.MISSILE_HEIGHT);
+        setVisible(true);
     }
 
     public String getImagePath() {

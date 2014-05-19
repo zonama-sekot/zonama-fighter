@@ -34,6 +34,7 @@ public class Space extends JPanel implements KeyListener, IPane {
         setDoubleBuffered(true);
         setBackground(Color.BLACK);
         setPreferredSize(new Dimension(Shared.SPACE_WIDTH, Shared.SPACE_HEIGHT));
+        setLayout(null);
     }
 
     /**

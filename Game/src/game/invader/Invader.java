@@ -42,8 +42,11 @@ public class Invader extends MovablePanel {
         setPreferredSize(new Dimension(Shared.INVADER_WIDTH, Shared.INVADER_HEIGHT));
         x = getRandomColumn();
         y = 0;
-        setVisible(true);
         setSpeed(Shared.INVADER_SPEED);
+
+        // Set the bounds because of the null layout of the parent
+        setBounds(x, y, Shared.INVADER_WIDTH, Shared.INVADER_HEIGHT);
+        setVisible(true);
     }
 
     public String getImagePath() {
