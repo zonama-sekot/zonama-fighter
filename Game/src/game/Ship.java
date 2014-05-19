@@ -15,7 +15,7 @@ public class Ship extends MovablePanel {
     /**
      * Hold a relative path to the spaceship image.
      */
-    private static final String ICON = "spaceship-animated.gif";
+    private static final String ICON = "Test1007.gif";
 
     /**
      * Initialize the ship:
@@ -31,6 +31,9 @@ public class Ship extends MovablePanel {
         x = (Shared.SPACE_WIDTH - Shared.FIGHTER_WIDTH) / 2;
         y = Shared.SPACE_HEIGHT - Shared.FIGHTER_HEIGHT;
         speed = Shared.FIGHTER_SPEED;
+        
+        // Set the bounds because of the null layout of the parent
+        setBounds(x, y, Shared.FIGHTER_WIDTH, Shared.FIGHTER_HEIGHT);
     }
 
     protected String getImagePath() {
