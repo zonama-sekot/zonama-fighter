@@ -1,9 +1,7 @@
 package game;
 
 import java.awt.Graphics;
-import javax.swing.JPanel;
-import java.awt.*;
-import javax.swing.*;
+import java.awt.Dimension;
 
 /**
  * I am a ship.
@@ -12,7 +10,7 @@ import javax.swing.*;
  * I have the looks of a spacecraft with an Image.
  * I should shoot and kill invaders, *but not yet*.
  */
-public class ShipWithImage extends MovablePanel {
+public class Ship extends MovablePanel {
 
     /**
      * Hold a relative path to the spaceship image.
@@ -26,8 +24,8 @@ public class ShipWithImage extends MovablePanel {
      *  - position at the bottom center of the space
      *  - set the initial speed
      */
-    public ShipWithImage() {
-        setDimension(Shared.FIGHTER_WIDTH, Shared.FIGHTER_HEIGHT);
+    public Ship() {
+        setPreferredSize(new Dimension(Shared.FIGHTER_WIDTH, Shared.FIGHTER_HEIGHT));
         setImageFromPath(ICON);
 
         // Default Position of the fighter - center bottom
@@ -49,7 +47,7 @@ public class ShipWithImage extends MovablePanel {
         }
 
         // If the fighter is on the right side of the screen
-        int maxX = Shared.SPACE_WIDTH - (int) dimension.getWidth();
+        int maxX = Shared.SPACE_WIDTH - (int) getPreferredSize().getWidth();
         if (x >= maxX && directionX > 0) {
             directionX = 0;
             x = maxX;
@@ -62,7 +60,7 @@ public class ShipWithImage extends MovablePanel {
         }
 
         // If the fighter is on the bottom side of the screen
-        int maxY = Shared.SPACE_HEIGHT - (int) dimension.getHeight();
+        int maxY = Shared.SPACE_HEIGHT - (int) getPreferredSize().getHeight();
         if (y >= maxY && directionY > 0) {
             directionY = 0;
             y = maxY;

@@ -1,60 +1,56 @@
 package game.space;
 
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
+import java.util.ArrayList;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.event.KeyListener;
+import java.awt.event.KeyEvent;
+
+import javax.swing.JPanel;
 
 import game.Shared;
+import game.IPane;
+import game.Engine;
+import game.Missile;
+import game.Ship;
+import game.invader.Invader;
 
 /**
- * I am a space - the main entry to the ship and the invaders
+ * I am the Space - the single JPanel living inside a frame.
  *
- * I hold a single SpacePanel and I resize to its size with pack().
- * (Found this to be listed as best practice - don't know why though :-/ )
- * I listen to keyboard events (wiht KeyListener)
- * and pass them to the SpacePanel.
+ * I accept KeyEvent and pass movements to the ship.
+ * I could move invaders down and missiles up.
  */
-public class Space extends JFrame implements KeyListener {
+public class Space extends JPanel implements KeyListener, IPane {
 
     /**
-     * The single SpacePanel I hold.
-     */
-    protected SpacePanel panel;
-
-    /**
-     * Initializing of the Space:
-     *  - set title of the window
+     * Initialize the Space:
+     *  - setDoubleBuffered for better painting and no flickering
      *  - set background
-     *  - exit the application when the frame is closed
-     *  - create and set the SpacePanel to be the content pane of the frame
-     *  - initialize the listenting to keys
-     *  - disable resize
-     *  - pack and show
+     *  - set the size
      */
     public Space() {
-        setTitle(Shared.NAME);
+        setDoubleBuffered(true);
         setBackground(Color.BLACK);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        panel = new SpacePanel();
-        setContentPane(panel);
-
-        setResizable(false);
-
-        // This refers to the KeyListener interface.
-        addKeyListener(this);
-
-        pack();
-        setVisible(true);
+        setPreferredSize(new Dimension(Shared.SPACE_WIDTH, Shared.SPACE_HEIGHT));
     }
 
     /**
-     * Get the space panel
-     *
-     * @return SpacePanel
+     * Move all invaders down.
+     * The invader objects should
+     * take care of their own hiding if they leave the space.
      */
-    public SpacePanel getPanel() {
-        return this.panel;
+    public void moveInvadersDown(ArrayList<Invader> invaders) {
+        for (Invader invader : invaders) {
+            invader.moveDown();
+        }
+    }
+
+    public void moveMissilesUp(ArrayList<Missile> missiles) {
+        for (Missile missile: missiles) {
+            missile.moveUp();
+        }
     }
 
     /*
@@ -72,7 +68,33 @@ public class Space extends JFrame implements KeyListener {
     @Override
     public void keyPressed(KeyEvent event) {
         // Notify the panel of the event
-        this.getPanel().notifyForKeyPressed(event);
+        int keyCode = event.getKeyCode();
+        Ship ship = Engine.getInstance().getShip();
+
+        switch (keyCode) {
+            case KeyEvent.VK_LEFT:
+                ship.moveLeft();
+            break;
+
+            case KeyEvent.VK_UP:
+                ship.moveUp();
+            break;
+
+            case KeyEvent.VK_RIGHT:
+                ship.moveRight();
+            break;
+
+            case KeyEvent.VK_DOWN:
+                ship.moveDown();
+            break;
+
+            case KeyEvent.VK_SPACE:
+                Engine.getInstance().addMissile(new Missile(
+                    ship.getX() + (int) ship.getPreferredSize().getWidth() / 2,
+                    ship.getY()
+                ));
+            break;
+        }
     }
 
     @Override

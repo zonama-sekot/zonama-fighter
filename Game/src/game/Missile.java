@@ -1,13 +1,11 @@
 package game;
 
-import java.awt.*;
-import javax.swing.*;
-import java.util.Random;
+import java.awt.Dimension;
 import java.util.ArrayList;
 
 import game.Shared;
 import game.MovablePanel;
-import game.space.SpacePanel;
+import game.space.Space;
 import game.invader.Invader;
 
 /**
@@ -36,7 +34,7 @@ public class Missile extends MovablePanel {
      * Make visible.
      */
     public Missile(int x, int y) {
-        setDimension(Shared.MISSILE_WIDTH, Shared.MISSILE_HEIGHT);
+        setPreferredSize(new Dimension(Shared.MISSILE_WIDTH, Shared.MISSILE_HEIGHT));
         setImageFromPath(ICON);
 
         // Default position of the missile should
@@ -76,8 +74,7 @@ public class Missile extends MovablePanel {
             setVisible(false);
         } else {
 
-            SpacePanel parent = (SpacePanel) getParent();
-            ArrayList<Invader> invaders = parent.getInvaders();
+            ArrayList<Invader> invaders = Engine.getInstance().getInvaders();
 
             for (Invader invader : invaders) {
                 if (invader.isVisible()

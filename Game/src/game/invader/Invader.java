@@ -1,14 +1,14 @@
 package game.invader;
 
-import java.awt.*;
-import javax.swing.*;
+import java.awt.Dimension;
 import java.util.Random;
 
 import game.Shared;
 import game.IPane;
+import game.Engine;
 import game.MovablePanel;
-import game.space.SpacePanel;
-import game.ShipWithImage;
+import game.space.Space;
+import game.Ship;
 
 /**
  * I am an invader.
@@ -33,13 +33,13 @@ public class Invader extends MovablePanel {
      * Constructor to initialize the invader.
      *
      * Set the Image instance from the ICON.
-     * Set the preferred size with Dimension based on the Shared constants.
+     * Set the size with Dimension based on the Shared constants.
      * Position at the top of the space at random column.
      * Make visible.
      */
     public Invader() {
         setImageFromPath(ICON);
-        setDimension(Shared.INVADER_WIDTH, Shared.INVADER_HEIGHT);
+        setPreferredSize(new Dimension(Shared.INVADER_WIDTH, Shared.INVADER_HEIGHT));
         x = getRandomColumn();
         y = 0;
         setVisible(true);
@@ -67,16 +67,15 @@ public class Invader extends MovablePanel {
         // **NOTE**: Not checking the top side at the moment for simplicity
         // The invader should not go up and it's actually coming from the top
         // side and it should be visible initially
-        if (y > Shared.SPACE_HEIGHT || (x > Shared.SPACE_WIDTH || (x - dimension.getWidth()) < 0)) {
+        if (y > Shared.SPACE_HEIGHT || (x > Shared.SPACE_WIDTH || (x - getPreferredSize().getWidth()) < 0)) {
             setVisible(false);
         }
 
         if (isVisible()) {
-            SpacePanel parent = (SpacePanel) getParent();
-            ShipWithImage ship = parent.getShip();
+            Ship ship = Engine.getInstance().getShip();
 
            if (checkCollision(ship)) {
-               parent.getTimer().stop();
+               Engine.getInstance().getTimer().stop();
            }
         }
     }
@@ -93,6 +92,6 @@ public class Invader extends MovablePanel {
         Random rand = new Random();
 
         // Adding one because random.nextInt(100) is in [1..99] range in Java
-        return rand.nextInt(Shared.SPACE_WIDTH + 1 - (int) dimension.getWidth());
+        return rand.nextInt(Shared.SPACE_WIDTH + 1 - (int) getPreferredSize().getWidth());
     }
 }

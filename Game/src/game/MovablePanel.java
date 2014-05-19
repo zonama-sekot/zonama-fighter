@@ -1,7 +1,6 @@
 package game;
 
 import javax.swing.JPanel;
-import java.awt.Dimension;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import java.awt.Graphics;
@@ -27,8 +26,6 @@ public abstract class MovablePanel extends JPanel implements IMovable, IPane {
     protected int y;
     
     protected int speed;
-
-    protected Dimension dimension;
 
     protected Image image;
 
@@ -130,36 +127,6 @@ public abstract class MovablePanel extends JPanel implements IMovable, IPane {
     }
 
     /**
-     * Get the dimension
-     *
-     * @return Dimension
-     */
-    public Dimension getDimension() {
-        return dimension;
-    }
-
-    /**
-     * Set the dimension
-     *
-     * @param Dimension
-     */
-    public void setDimension(Dimension dimension) {
-        this.dimension = dimension;
-        setPreferredSize(this.dimension);
-    }
-
-    /**
-     * Set the dimension from integers
-     *
-     * @param int width
-     * @param int height
-     */
-    public void setDimension(int width, int height) {
-        this.dimension = new Dimension(width, height);
-        setPreferredSize(this.dimension);
-    }
-
-    /**
      * Get the image instance.
      *
      * @return Image
@@ -205,11 +172,10 @@ public abstract class MovablePanel extends JPanel implements IMovable, IPane {
      * @return boolean
      */
     public boolean checkCollision(IPane pane) {
-        Dimension paneDimension = pane.getDimension();
-        int invaderWidth = (int) dimension.getWidth();
-        int invaderHeight = (int) dimension.getHeight();
-        int paneWidth = (int) paneDimension.getWidth();
-        int paneHeight = (int) paneDimension.getHeight();
+        int invaderWidth = (int) getPreferredSize().getWidth();
+        int invaderHeight = (int) getPreferredSize().getHeight();
+        int paneWidth = (int) pane.getPreferredSize().getWidth();
+        int paneHeight = (int) pane.getPreferredSize().getHeight();
 
         return getX() < pane.getX() + paneWidth
             && getX() + invaderWidth > pane.getX()
