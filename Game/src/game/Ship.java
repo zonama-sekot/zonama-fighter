@@ -15,7 +15,7 @@ public class Ship extends MovablePanel {
     /**
      * Hold a relative path to the spaceship image.
      */
-    private static final String ICON = "Test1007.gif";
+    private static final String ICON = "spaceship.gif";
 
     /**
      * Initialize the ship:
