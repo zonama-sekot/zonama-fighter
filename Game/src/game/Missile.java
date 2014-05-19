@@ -35,7 +35,7 @@ public class Missile extends MovablePanel {
      */
     public Missile(int x, int y) {
         setPreferredSize(new Dimension(Shared.MISSILE_WIDTH, Shared.MISSILE_HEIGHT));
-        setImageFromPath(ICON);
+        setImageFromPath(getImagePath());
 
         // Default position of the missile should
         // take into consideration its own width and height
@@ -44,6 +44,10 @@ public class Missile extends MovablePanel {
 
         setVisible(true);
         setSpeed(Shared.MISSILE_SPEED);
+    }
+
+    public String getImagePath() {
+        return ICON;
     }
 
     /**

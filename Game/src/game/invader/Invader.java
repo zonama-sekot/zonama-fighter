@@ -38,12 +38,16 @@ public class Invader extends MovablePanel {
      * Make visible.
      */
     public Invader() {
-        setImageFromPath(ICON);
+        setImageFromPath(getImagePath());
         setPreferredSize(new Dimension(Shared.INVADER_WIDTH, Shared.INVADER_HEIGHT));
         x = getRandomColumn();
         y = 0;
         setVisible(true);
         setSpeed(Shared.INVADER_SPEED);
+    }
+
+    public String getImagePath() {
+        return ICON;
     }
 
     /**
