@@ -1,6 +1,7 @@
 package game.player;
 
 import game.Shared;
+import game.Engine;
 
 /**
  * I am a player.
@@ -33,6 +34,9 @@ public class Player {
 
     public void decreaseLives() {
         lives--;
+        if (!isAlive()) {
+            Engine.getInstance().stop();
+        }
     }
 
     public boolean isAlive() {

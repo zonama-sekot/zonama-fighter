@@ -78,8 +78,7 @@ public class Missile extends MovablePanel {
             ArrayList<Invader> invaders = engine.getInvaders();
 
             for (Invader invader : invaders) {
-                if (invader.isVisible()
-                    && invader.checkCollision(this)) {
+                if (invader.isVisible() && invader.checkCollision(this)) {
                     invader.setVisible(false);
                     setVisible(false);
                     engine.getPlayer().increasePoints();

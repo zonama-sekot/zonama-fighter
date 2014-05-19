@@ -116,15 +116,6 @@ public class Engine implements ActionListener {
     }
 
     /**
-     * Get the Timer.
-     * 
-     * @return Timer
-     */
-    public Timer getTimer() {
-        return timer;
-    }
-
-    /**
      * Get the invaders
      *
      * @return ArrayList<Invader>
@@ -158,6 +149,10 @@ public class Engine implements ActionListener {
         frame.setVisible(true);
         timer = new Timer(Shared.TIMER_DELAY, this);
         timer.start();
+    }
+
+    public void stop() {
+        timer.stop();
     }
 
     /**
