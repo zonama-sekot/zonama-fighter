@@ -1,33 +1,51 @@
 package game;
 
 import java.awt.Dimension;
+import java.util.ArrayList;
+
+import game.Shared;
+import game.MovablePanel;
+import game.space.Space;
+import game.invader.Invader;
+
+import java.awt.Graphics;
+
+import javax.swing.Timer;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 
 
 
-public class Crash extends MovablePanel {
+public class Crash extends MovablePanel implements ActionListener {
 
    
-    private static final String ICON = "0Crash_Hewit_AniA5_32b.gif";
+    private static final String ICON = "Crash_Bomb2.gif";
 
-
-    public Crash(int x, int y) {
+    private Timer timer;;
+    private int t;
+    
+    public Crash(int x_, int y_) {
     	
     	 setDoubleBuffered(true);
     	
     	
-        setPreferredSize(new Dimension(50, 50));
+    	
+        setPreferredSize(new Dimension(40, 40));
         setImageFromPath(getImagePath());
 
         // Default position of the missile should
         // take into consideration its own width and height
-        this.x = x  ;
-        this.y = y ;
+        
+        this.x = x_  ;
+        this.y = y_ ;
 
         setVisible(true);
         setSpeed(0);
         
-        
+        timer = new Timer(Shared.TIMER_DELAY, this);
+        timer.start();
         
     }
 
@@ -35,6 +53,35 @@ public class Crash extends MovablePanel {
         return ICON;
     }
 
+   @Override
+   protected void performMove() {
+        if (!isVisible()) {
+          return;
+       }
+
+       super.performMove();
+
+       
+     //  if(y<100){ this.setVisible(false);  }
+       
+       
+       
+       
+       
+    }
+    
+    
+  
+
+public void actionPerformed(ActionEvent arg0) {
+	// TODO Auto-generated method stub
+	
+	 t++;
+	   if(t==5){setVisible(false);timer.stop(); this.remove(this);}
+	
+}
+   
+   
    
 }
 

@@ -87,10 +87,10 @@ public class Invader extends MovablePanel {
                setVisible(false);
                
               
-             Engine.getInstance().addCrash(new Crash(50,50));
+          //   Engine.getInstance().addMissile(new Missile(150,150));
                
                
-            //  Engine.getInstance().addCrash(new Crash( this.x,this.y ));
+             Engine.getInstance().addCrash(new Crash( this.x, this.y));
                
                
                

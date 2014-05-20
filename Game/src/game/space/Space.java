@@ -18,23 +18,13 @@ import game.Missile;
 import game.Ship;
 import game.invader.Invader;
 
-/**
- * I am the Space - the single JPanel living inside a frame.
- *
- * I accept KeyEvent and pass movements to the ship.
- * I could move invaders down and missiles up.
- */
+
 public class Space extends  MovablePanel implements KeyListener, IPane {
 
 	 private static final String ICON = "0Ground_DeepMoon_AniA3_16bit.gif";
 
 	 Ship ship = Engine.getInstance().getShip();
-    /**
-     * Initialize the Space:
-     *  - setDoubleBuffered for better painting and no flickering
-     *  - set background
-     *  - set the size
-     */
+    
     public Space() {
     	
     	 setImageFromPath(getImagePath());
@@ -74,11 +64,7 @@ public class Space extends  MovablePanel implements KeyListener, IPane {
         
     }
 
-    /**
-     * Move all invaders down.
-     * The invader objects should
-     * take care of their own hiding if they leave the space.
-     */
+   
     public void moveInvadersDown(ArrayList<Invader> invaders) {
         for (Invader invader : invaders) {
             invader.moveDown();
@@ -91,13 +77,7 @@ public class Space extends  MovablePanel implements KeyListener, IPane {
         }
     }
 
-    /*
-     * KeyListener methods
-     * ====================
-     *
-     * We need to catch only the keyPressed
-     */
-
+   
   //  @Override
     public void keyTyped(KeyEvent event) {
 

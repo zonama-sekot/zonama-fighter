@@ -198,7 +198,7 @@ public class Engine implements ActionListener {
     
     public void addCrash(Crash newCrash){
     	
-    	crash.add(newCrash );
+    	//crash.add(newCrash );
     	space.add(newCrash);
     	space.revalidate();
     	space.repaint();
