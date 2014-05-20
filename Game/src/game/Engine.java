@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import game.space.Space;
+import game.space.SpacePanel;
 import game.player.Player;
 import game.player.PlayerPanel;
 import game.invader.Invader;
@@ -58,6 +59,8 @@ public class Engine implements ActionListener {
      * The player panel - prints the points and lives of the player
      */
     protected PlayerPanel playerPanel;
+    
+    protected SpacePanel spacePanel;
 
     /**
      * All the invaders on the Space.
@@ -111,6 +114,15 @@ public class Engine implements ActionListener {
     public Player getPlayer() {
         return player;
     }
+    
+    /**
+     * Get the spacepanel.
+     * 
+     * @return spacepanel
+     */
+    public SpacePanel getSpacePanel() {
+        return spacePanel;
+    }
 
     /**
      * Get the Ship.
@@ -147,6 +159,7 @@ public class Engine implements ActionListener {
         player = new Player();
         ship = new Ship();
         playerPanel = new PlayerPanel();
+        spacePanel = new SpacePanel();
         space = new Space();
         JFrame frame = createFrame();
         frame.getContentPane().add(space);
@@ -158,6 +171,7 @@ public class Engine implements ActionListener {
         ship.setBufferedImageFromPath(ship.getImagePath());
 
         space.add(playerPanel);
+        space.add(spacePanel);
 
         frame.addKeyListener(space);
         frame.pack();
@@ -185,6 +199,7 @@ public class Engine implements ActionListener {
             addInvader(new Invader());
         }
         playerPanel.updateLabels();
+        getSpacePanel();
         space.repaint();
     }
 
@@ -229,7 +244,7 @@ public class Engine implements ActionListener {
 
     private static JFrame createFrame() {
         JFrame frame = new JFrame(Shared.NAME);
-        frame.setBackground(Color.BLACK);
+        //frame.setBackground(Color.BLACK);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
