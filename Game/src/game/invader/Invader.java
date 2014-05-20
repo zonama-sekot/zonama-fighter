@@ -1,8 +1,11 @@
 package game.invader;
 
 import java.awt.Dimension;
+import java.util.ArrayList;
 import java.util.Random;
 
+import game.Crash;
+import game.Missile;
 import game.Shared;
 import game.IPane;
 import game.Engine;
@@ -27,7 +30,7 @@ public class Invader extends MovablePanel {
     /**
      * Constant holding the relative path to the invader image
      */
-    private static final String ICON = "invader.jpg";
+    private static final String ICON = "TInvader_lazur.gif";
 
     /**
      * Constructor to initialize the invader.
@@ -41,7 +44,7 @@ public class Invader extends MovablePanel {
         setImageFromPath(getImagePath());
         setPreferredSize(new Dimension(Shared.INVADER_WIDTH, Shared.INVADER_HEIGHT));
         x = getRandomColumn();
-        y = 0;
+        y = -40;
         setVisible(true);
         setSpeed(Shared.INVADER_SPEED);
     }
@@ -77,10 +80,20 @@ public class Invader extends MovablePanel {
 
         if (isVisible()) {
             Ship ship = Engine.getInstance().getShip();
-
+      //     ArrayList<Invader> invader = Engine.getInstance().getInvaders();
+            
            if (checkCollision(ship)) {
                Engine.getInstance().getPlayer().decreaseLives();
                setVisible(false);
+               
+              
+             Engine.getInstance().addCrash(new Crash(50,50));
+               
+               
+            //  Engine.getInstance().addCrash(new Crash( this.x,this.y ));
+               
+               
+               
            }
         }
     }

@@ -12,6 +12,7 @@ import java.util.Random;
 
 import game.space.Space;
 import game.player.Player;
+import game.Crash;
 import game.invader.Invader;
 
 /**
@@ -52,6 +53,8 @@ public class Engine implements ActionListener {
      * The player - points and lives
      */
     protected Player player;
+    
+   protected  Crash crash;
 
     /**
      * All the invaders on the Space.
@@ -93,6 +96,14 @@ public class Engine implements ActionListener {
      * 
      * @return Space
      */
+
+	public Crash getCrash() {
+		// TODO Auto-generated method stub
+		return this.crash;
+	}
+   
+    
+    
     public Space getSpace(){
         return this.space;
     }
@@ -184,6 +195,17 @@ public class Engine implements ActionListener {
      *
      * @param Invader newInvader
      */
+    
+    public void addCrash(Crash newCrash){
+    	
+    	crash.add(newCrash );
+    	space.add(newCrash);
+    	space.revalidate();
+    	space.repaint();
+    }
+    
+    
+    
     public void addInvader(Invader newInvader) {
         invaders.add(newInvader);
         space.add(newInvader);
@@ -224,4 +246,5 @@ public class Engine implements ActionListener {
         frame.setResizable(false);
         return frame;
     }
+
 }

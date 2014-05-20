@@ -1,14 +1,16 @@
 package game.space;
 
 import java.util.ArrayList;
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
+import game.MovablePanel;
 import game.Shared;
 import game.IPane;
 import game.Engine;
@@ -22,8 +24,11 @@ import game.invader.Invader;
  * I accept KeyEvent and pass movements to the ship.
  * I could move invaders down and missiles up.
  */
-public class Space extends JPanel implements KeyListener, IPane {
+public class Space extends  MovablePanel implements KeyListener, IPane {
 
+	 private static final String ICON = "0Ground_DeepMoon_AniA3_16bit.gif";
+
+	 Ship ship = Engine.getInstance().getShip();
     /**
      * Initialize the Space:
      *  - setDoubleBuffered for better painting and no flickering
@@ -31,9 +36,42 @@ public class Space extends JPanel implements KeyListener, IPane {
      *  - set the size
      */
     public Space() {
-        setDoubleBuffered(true);
+    	
+    	 setImageFromPath(getImagePath());
+    	 
+         setDoubleBuffered(true);
+         
         setBackground(Color.BLACK);
+        
         setPreferredSize(new Dimension(Shared.SPACE_WIDTH, Shared.SPACE_HEIGHT));
+        
+       
+        
+
+        // Default Position of the fighter - center bottom
+        x = 0;
+        y = 0;
+        speed = 0;
+        
+        // Set the bounds because of the null layout of the parent
+        setBounds(x, y, Shared.SPACE_WIDTH, Shared.SPACE_WIDTH);
+        
+       
+        
+        JLabel myLabel = new JLabel();
+        String  sText  = " SCORE        LIFE                                                                                                       ";
+      myLabel.setBackground(Color.GRAY);
+      myLabel.setOpaque(true);
+       myLabel.setText (sText);
+       myLabel.setLocation(x, 30);
+       myLabel.setForeground(Color.GREEN);
+       this.add(myLabel);
+         
+         
+         
+         
+         
+        
     }
 
     /**
@@ -60,16 +98,17 @@ public class Space extends JPanel implements KeyListener, IPane {
      * We need to catch only the keyPressed
      */
 
-    @Override
+  //  @Override
     public void keyTyped(KeyEvent event) {
 
+    	
     }
 
-    @Override
+  //  @Override
     public void keyPressed(KeyEvent event) {
         // Notify the panel of the event
         int keyCode = event.getKeyCode();
-        Ship ship = Engine.getInstance().getShip();
+     //   Ship ship = Engine.getInstance().getShip();
 
         switch (keyCode) {
             case KeyEvent.VK_LEFT:
@@ -95,10 +134,20 @@ public class Space extends JPanel implements KeyListener, IPane {
                 ));
             break;
         }
+        
+        
     }
 
-    @Override
+   // @Override
     public void keyReleased(KeyEvent event) {
 
+    	
+    	
     }
+
+@Override
+protected String getImagePath() {
+	// TODO Auto-generated method stub
+	return ICON;
+}
 }

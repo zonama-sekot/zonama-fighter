@@ -74,4 +74,6 @@ public class Ship extends MovablePanel {
 
         super.performMove();
     }
+    
+    
 }

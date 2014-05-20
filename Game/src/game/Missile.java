@@ -23,7 +23,7 @@ public class Missile extends MovablePanel {
     /**
      * Constant holding the relative path to the missile image
      */
-    private static final String ICON = "missile.png";
+    private static final String ICON = "TShip_bomb.gif";
 
     /**
      * Constructor to initialize the missile.
@@ -39,8 +39,8 @@ public class Missile extends MovablePanel {
 
         // Default position of the missile should
         // take into consideration its own width and height
-        this.x = x - Shared.MISSILE_WIDTH / 2;
-        this.y = y - Shared.MISSILE_HEIGHT / 2;
+        this.x = x - Shared.MISSILE_WIDTH/2 ;
+        this.y = y - Shared.MISSILE_HEIGHT/2;
 
         setVisible(true);
         setSpeed(Shared.MISSILE_SPEED);

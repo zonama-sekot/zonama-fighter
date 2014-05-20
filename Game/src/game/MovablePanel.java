@@ -189,8 +189,18 @@ public abstract class MovablePanel extends JPanel implements IMovable, IPane {
 
         // Set alpha transparency
         Graphics2D graphics2D = (Graphics2D) graphics;
-        graphics2D.setComposite(AlphaComposite.Clear);
-        graphics2D.setComposite(AlphaComposite.Src);
+     //   graphics2D.setComposite(AlphaComposite.Clear); //-----------
+     //  graphics2D.setComposite(AlphaComposite.Src);   //------------
+        
+       
+      //  graphics2D.setComposite(AlphaComposite.DstIn);
+        
+        this.setBackground(new Color(0,0,0,0));
+        
+         AlphaComposite ac = java.awt.AlphaComposite.getInstance(AlphaComposite.SRC_ATOP,1F);
+        
+         graphics2D.setComposite(ac);
+                                                   //==========
 
         // see javadoc for more info on the parameters
         graphics.drawImage(getImage(), 0, 0, null);
@@ -203,6 +213,7 @@ public abstract class MovablePanel extends JPanel implements IMovable, IPane {
      * @return boolean
      */
     public boolean checkCollision(IPane pane) {
+    	
         int invaderWidth = (int) getPreferredSize().getWidth();
         int invaderHeight = (int) getPreferredSize().getHeight();
         int paneWidth = (int) pane.getPreferredSize().getWidth();
