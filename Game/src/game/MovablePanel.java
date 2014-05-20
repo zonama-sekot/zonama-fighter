@@ -170,6 +170,7 @@ public abstract class MovablePanel extends JPanel implements IMovable, IPane {
         );
         Graphics graphics = bufferedImage.createGraphics();
         graphics.setColor(new Color(0, 0, 0, 0));
+        setBackground(new Color(0, 0, 0, 0));
         setImage(icon.getImage());
     }
 
@@ -191,6 +192,8 @@ public abstract class MovablePanel extends JPanel implements IMovable, IPane {
         Graphics2D graphics2D = (Graphics2D) graphics;
         graphics2D.setComposite(AlphaComposite.Clear);
         graphics2D.setComposite(AlphaComposite.Src);
+        AlphaComposite ac = AlphaComposite.getInstance(AlphaComposite.SRC_ATOP, 1F);
+        graphics2D.setComposite(ac);
 
         // see javadoc for more info on the parameters
         graphics.drawImage(getImage(), 0, 0, null);
