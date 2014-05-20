@@ -27,7 +27,7 @@ public class Invader extends MovablePanel {
     /**
      * Constant holding the relative path to the invader image
      */
-    private static final String ICON = "invader.jpg";
+    private static final String ICON = "invader.gif";
 
     /**
      * Constructor to initialize the invader.

@@ -20,13 +20,16 @@ public interface Shared {
     public static final int FIGHTER_HEIGHT = 81;
     public static final int FIGHTER_SPEED = 5;
 
-    public static final int INVADER_WIDTH = 20;
-    public static final int INVADER_HEIGHT = 20;
+    public static final int INVADER_WIDTH = 59;
+    public static final int INVADER_HEIGHT = 49;
     public static final int INVADER_SPEED = 1;
     
     public static final int MISSILE_WIDTH = 11;
     public static final int MISSILE_HEIGHT = 17;
     public static final int MISSILE_SPEED = 3;
+    
+    public static final int EXPLOSION_WIDTH = 51;
+    public static final int EXPLOSION_HEIGHT = 48;
 
     public static final int TIMER_DELAY = 10;
 
