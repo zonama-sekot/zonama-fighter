@@ -12,6 +12,7 @@ import java.util.Random;
 
 import game.space.Space;
 import game.player.Player;
+import game.player.PlayerPanel;
 import game.invader.Invader;
 
 /**
@@ -52,6 +53,11 @@ public class Engine implements ActionListener {
      * The player - points and lives
      */
     protected Player player;
+
+    /**
+     * The player panel - prints the points and lives of the player
+     */
+    protected PlayerPanel playerPanel;
 
     /**
      * All the invaders on the Space.
@@ -140,6 +146,7 @@ public class Engine implements ActionListener {
     public void start() {
         player = new Player();
         ship = new Ship();
+        playerPanel = new PlayerPanel();
         space = new Space();
         JFrame frame = createFrame();
         frame.getContentPane().add(space);
@@ -149,6 +156,8 @@ public class Engine implements ActionListener {
         // Otherwise the transparent images are not visible
         space.add(ship);
         ship.setBufferedImageFromPath(ship.getImagePath());
+
+        space.add(playerPanel);
 
         frame.addKeyListener(space);
         frame.pack();
@@ -175,6 +184,7 @@ public class Engine implements ActionListener {
         if (shouldCreateInvader()) {
             addInvader(new Invader());
         }
+        playerPanel.updateLabels();
         space.repaint();
     }
 
@@ -221,6 +231,7 @@ public class Engine implements ActionListener {
         JFrame frame = new JFrame(Shared.NAME);
         frame.setBackground(Color.BLACK);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLocationRelativeTo(null);
         frame.setResizable(false);
         return frame;
     }
