@@ -139,6 +139,10 @@ public class Engine implements ActionListener {
         return missiles;
     }
 
+    public int getTotalMomentsCount() {
+        return totalMomentsCount;
+    }
+
     /**
      * Start the game.
      * Create initial instances, add them together and start the timer.
@@ -162,6 +166,7 @@ public class Engine implements ActionListener {
         frame.pack();
         frame.setVisible(true);
         timer = new Timer(Shared.TIMER_DELAY, this);
+        timer.addActionListener(ship);
         timer.start();
     }
 
