@@ -18,7 +18,7 @@ import game.invader.Invader;
  * I accept KeyEvent and pass movements to the ship.
  * I could move invaders down and missiles up.
  */
-public class Space extends JPanel implements KeyListener, IPane {
+public class Space extends JPanel implements IPane {
 
     /**
      * Initialize the Space:
