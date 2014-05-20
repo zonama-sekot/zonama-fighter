@@ -4,16 +4,12 @@ import java.util.ArrayList;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.event.KeyListener;
-import java.awt.event.KeyEvent;
 
 import javax.swing.JPanel;
 
 import game.Shared;
 import game.IPane;
-import game.Engine;
 import game.Missile;
-import game.Ship;
 import game.invader.Invader;
 
 /**
@@ -52,54 +48,5 @@ public class Space extends JPanel implements KeyListener, IPane {
         for (Missile missile: missiles) {
             missile.moveUp();
         }
-    }
-
-    /*
-     * KeyListener methods
-     * ====================
-     *
-     * We need to catch only the keyPressed
-     */
-
-    @Override
-    public void keyTyped(KeyEvent event) {
-
-    }
-
-    @Override
-    public void keyPressed(KeyEvent event) {
-        // Notify the panel of the event
-        int keyCode = event.getKeyCode();
-        Ship ship = Engine.getInstance().getShip();
-
-        switch (keyCode) {
-            case KeyEvent.VK_LEFT:
-                ship.moveLeft();
-            break;
-
-            case KeyEvent.VK_UP:
-                ship.moveUp();
-            break;
-
-            case KeyEvent.VK_RIGHT:
-                ship.moveRight();
-            break;
-
-            case KeyEvent.VK_DOWN:
-                ship.moveDown();
-            break;
-
-            case KeyEvent.VK_SPACE:
-                Engine.getInstance().addMissile(new Missile(
-                    ship.getX() + (int) ship.getPreferredSize().getWidth() / 2,
-                    ship.getY()
-                ));
-            break;
-        }
-    }
-
-    @Override
-    public void keyReleased(KeyEvent event) {
-
     }
 }

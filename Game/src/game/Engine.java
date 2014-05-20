@@ -159,7 +159,6 @@ public class Engine implements ActionListener {
 
         space.add(playerPanel);
 
-        frame.addKeyListener(space);
         frame.pack();
         frame.setVisible(true);
         timer = new Timer(Shared.TIMER_DELAY, this);
