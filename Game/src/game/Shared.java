@@ -18,17 +18,17 @@ public interface Shared {
 
     public static final int FIGHTER_WIDTH = 78;
     public static final int FIGHTER_HEIGHT = 81;
-    public static final int FIGHTER_SPEED = 5;
+    public static final int FIGHTER_SPEED = 3;
 
     public static final int INVADER_WIDTH = 20;
     public static final int INVADER_HEIGHT = 20;
-    public static final int INVADER_SPEED = 1;
+    public static final int INVADER_SPEED = 2;
     
     public static final int MISSILE_WIDTH = 11;
     public static final int MISSILE_HEIGHT = 17;
-    public static final int MISSILE_SPEED = 3;
+    public static final int MISSILE_SPEED = 6;
 
-    public static final int TIMER_DELAY = 10;
+    public static final int TIMER_DELAY = 20;
 
     public static final int NEW_INVADER_THRESHOLD = 30;
     public static final double NEW_INVADER_CHANCE = 80;

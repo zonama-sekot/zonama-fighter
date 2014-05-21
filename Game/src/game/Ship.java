@@ -1,7 +1,21 @@
 package game;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
 import java.awt.Graphics;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+
+import javax.swing.JComponent;
+import javax.swing.ActionMap;
+import javax.swing.InputMap;
+import javax.swing.KeyStroke;
+import javax.swing.AbstractAction;
+
+import game.Direction;
 
 /**
  * I am a ship.
@@ -10,7 +24,9 @@ import java.awt.Dimension;
  * I have the looks of a spacecraft with an Image.
  * I should shoot and kill invaders, *but not yet*.
  */
-public class Ship extends MovablePanel {
+public class Ship extends MovablePanel implements ActionListener {
+
+    private Map<Direction, Boolean> directionMap = new HashMap<Direction, Boolean>();
 
     /**
      * Hold a relative path to the spaceship image.
@@ -34,6 +50,12 @@ public class Ship extends MovablePanel {
         
         // Set the bounds because of the null layout of the parent
         setBounds(x, y, Shared.FIGHTER_WIDTH, Shared.FIGHTER_HEIGHT);
+
+        for (Direction direction : Direction.values()) {
+            directionMap.put(direction, false);
+        }
+
+        setKeyBindings();
     }
 
     protected String getImagePath() {
@@ -73,5 +95,67 @@ public class Ship extends MovablePanel {
         }
 
         super.performMove();
+    }
+
+    private void setKeyBindings() {
+        InputMap inputMap = getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+        ActionMap actionMap = getActionMap();
+        for (final Direction direction : Direction.values()) {
+            KeyStroke pressed = KeyStroke.getKeyStroke(direction.getKeyCode(), 0, false);
+            KeyStroke released = KeyStroke.getKeyStroke(direction.getKeyCode(), 0, true);
+            inputMap.put(pressed, direction.toString() + "pressed");
+            inputMap.put(released, direction.toString() + "released");
+
+            actionMap.put(direction.toString() + "pressed", new AbstractAction() {
+
+                private static final long serialVersionUID = 1L;
+
+                @Override
+                public void actionPerformed(ActionEvent event) {
+                    directionMap.put(direction, true);
+                }
+            });
+
+            actionMap.put(direction.toString() + "released", new AbstractAction() {
+
+                private static final long serialVersionUID = 1L;
+
+                @Override
+                public void actionPerformed(ActionEvent event) {
+                    directionMap.put(direction, false);
+                }
+            });
+        }
+    }
+
+    public void actionPerformed(ActionEvent event) {
+        boolean moved = false;
+        for (Direction direction : Direction.values()) {
+            if (directionMap.get(direction)) {
+
+                if (direction.getXDirection() == 0 && direction.getYDirection() == 0) {
+                    if (Engine.getInstance().getTotalMomentsCount() % 10 == 0) {
+                        Engine.getInstance().addMissile(new Missile(
+                            getX() + (int) getPreferredSize().getWidth() / 2,
+                            getY()
+                        ));
+                    }
+                } else {
+                    x += getSpeed() * direction.getXDirection();
+                    y += getSpeed() * direction.getYDirection();
+                    moved = true;
+                }
+            }
+        }
+
+        if (moved) {
+            int drawX = x - 2 * getSpeed();
+            int drawY = y - 2 * getSpeed();
+            int drawWidth = (int) getPreferredSize().getWidth() + 4 * getSpeed();
+            int drawHeight = (int) getPreferredSize().getHeight() + 4 * getSpeed();
+
+            // !! repaint just the ship
+            repaint(drawX, drawY, drawWidth, drawHeight);
+        }
     }
 }
