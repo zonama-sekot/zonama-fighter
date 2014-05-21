@@ -12,4 +12,4 @@ Authors
 - [@externo](https://github.com/externo)
 - [@rosenrusev](https://github.com/rosenrusev)
 - [@veni-naydenov](https://github.com/Veni-Naydenov)
-- [@hkdobrev]
+- [@hkdobrev](https://github.com/hkdobrev)
