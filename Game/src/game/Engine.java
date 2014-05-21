@@ -174,6 +174,10 @@ public class Engine implements ActionListener {
         timer.stop();
     }
 
+    public boolean isRunning() {
+        return timer.isRunning();
+    }
+
     /**
      * Called by the Timer because of the ActionListener interface
      *
