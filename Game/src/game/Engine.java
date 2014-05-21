@@ -195,17 +195,6 @@ public class Engine implements ActionListener {
      *
      * @param Invader newInvader
      */
-    
-    public void addCrash(Crash newCrash){
-    	
-    	//crash.add(newCrash );
-    	space.add(newCrash);
-    	space.revalidate();
-    	space.repaint();
-    }
-    
-    
-    
     public void addInvader(Invader newInvader) {
         invaders.add(newInvader);
         space.add(newInvader);

@@ -4,7 +4,7 @@ public interface Shared {
 
     public static final String NAME = "Zonama Fighter";
 
-    public static final int INITIAL_LIVES = 7;
+    public static final int INITIAL_LIVES = 3;
     public static final int INITIAL_POINTS = 0;
 
     public static final int SPACE_WIDTH = 389;
@@ -26,4 +26,7 @@ public interface Shared {
 
     public static final int NEW_INVADER_THRESHOLD = 30;
     public static final double NEW_INVADER_CHANCE = 80;
+
+    public static final int CRASH_WIDTH = 40;
+    public static final int CRASH_HEIGHT = 40;
 }

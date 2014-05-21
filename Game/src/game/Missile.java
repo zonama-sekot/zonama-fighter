@@ -21,8 +21,8 @@ public class Missile extends MovablePanel {
 
         // Default position of the missile should
         // take into consideration its own width and height
-        this.x = x - Shared.MISSILE_WIDTH/2 ;
-        this.y = y - Shared.MISSILE_HEIGHT/2;
+        this.x = x - Shared.MISSILE_WIDTH / 2 ;
+        this.y = y - Shared.MISSILE_HEIGHT / 2;
 
         setVisible(true);
         setSpeed(Shared.MISSILE_SPEED);
@@ -56,8 +56,7 @@ public class Missile extends MovablePanel {
                     setVisible(false);
                     engine.getPlayer().increasePoints();
                     
-                    Engine.getInstance().addCrash(new Crash( this.x, this.y));
-                    
+                    Engine.getInstance().getSpace().addCrash(new Crash(getX(), getY() + (int) getPreferredSize().getHeight()));
                 }
             }
         }
