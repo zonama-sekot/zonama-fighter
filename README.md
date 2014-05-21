@@ -13,3 +13,4 @@ Authors
 - [@rosenrusev](https://github.com/rosenrusev)
 - [@veni-naydenov](https://github.com/Veni-Naydenov)
 - [@hkdobrev](https://github.com/hkdobrev)
+- [@dian-atanasov](https://github.com/dian-atanasov)
