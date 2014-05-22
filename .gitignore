@@ -15,3 +15,7 @@ bin/
 hs_err_pid*
 
 .idea
+.settings
+*.iml
+.classpath
+.project
