@@ -27,7 +27,7 @@ import game.invader.Invader;
  */
 public class Space extends JPanel implements IPane {
 
-    private static final String BACKGROUND = "ezgif-save (8).gif";
+    private static final String BACKGROUND = "moon.gif";
 
     private Image image;
 
